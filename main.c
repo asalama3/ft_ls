@@ -14,21 +14,26 @@
 
 int			main(int argc, char **argv)
 {
+	int				i;
+	char			*tmp;
+	char			*dir;
+	struct dirent	*ptr;
 
-	if argc > 1
-fonction: gerer les flags
-		option[]={"a", "R", "u", "t", ....}
-	else
-		perror
-
-
-while (i < argc)
-{
-
-	readdir
-
-	i++
-}
-
+	tmp = "./";
+	i = 1;
+	while (argc)
+	{
+		if (argc == 1)
+			dir = tmp;
+		else
+			dir = argv[i];
+		if (!(tmp = opendir(argv[i])))
+			return (-1);
+		while ((ptr = readdir(tmp)))
+		{
+			//appeler fonctions: flags
+		}
+		i++;
+	}
 	return (0);
 }

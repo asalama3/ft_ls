@@ -46,17 +46,17 @@ int		main(int argc, char **argv)
 		printf("mtime: %ld\n", buf->st_mtime);
 		printf("ctime: %ld\n", buf->st_ctime);
 		
-		if (!(tmp = opendir(argv[1])))
-			return (1);
-		if (!(ptr = readdir(tmp)))
-			return (1);
-		printf("------DIR------\n");
-		printf("ino: %llu\n",ptr->d_ino);
+//		if (!(tmp = opendir(argv[1])))
+//			return (1);
+		while ((ptr = readdir(tmp)))
+		{
+			printf("------DIR------\n");
+			printf("ino: %llu\n",ptr->d_ino);
 //		printf("%llu\n",ptr->d_off);
-		printf("reclen: %hu\n",ptr->d_reclen);
-		printf("type: %hhu\n",ptr->d_type);
-		printf("name: %s\n",ptr->d_name);
-
+			printf("reclen: %hu\n",ptr->d_reclen);
+			printf("type: %hhu\n",ptr->d_type);
+			printf("name: %s\n",ptr->d_name);
+		}
 		if (closedir(tmp) == -1)
 			return (1);
 	}
