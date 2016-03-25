@@ -12,12 +12,25 @@
 
 #include "includes/ft_ls.h"
 
+int		ft_stat(char **argv, struct stat *buf, int k)
+{
+	if (!(buf = (struct stat*)malloc(sizeof(struct stat))))
+		return (-1);
+	if ((stat(argv[k], buf)) == -1)
+//		ft_stat_error(argv[k]);
+		return (-1);
+//		if(S_ISREG(buf->st_mode)
+			printf("%s\n", argv[k]);
+	return (0);
+}
+
 int			parse(t_init *in, int argc, char **argv, int k)
 {
+	struct stat		*buf;
 //	int		i;
 
 //	i = k;
-	ft_putendl(argv[k]);
+//	ft_putendl(argv[k]);
 //	if (!(in->dir == opendir(argv[i++])))
 //	in->dir = opendir(argv[i++]);
 //	if (in->dir == NULL)
@@ -25,8 +38,11 @@ int			parse(t_init *in, int argc, char **argv, int k)
 	{
 		if (!(in->dir = opendir(argv[k])))
 		{
-			ft_putendl("yftgf");
-			ft_dir_error(argv[k]);
+			if((ft_stat(argv, buf, k)) == -1)
+			{
+				ft_putendl("yftgf");
+				ft_dir_error(argv[k]);
+			}
 		}
 		if (in->dir)
 		{

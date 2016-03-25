@@ -57,14 +57,14 @@ int			main(int argc, char **argv)
 
 //	tmp = "./";
 	k = 1;
-	if (argc == 1)
-	{}//		argv[1] = ".";
-	else
-	{
+//	if (argc == 1)
+//	{}//		argv[1] = ".";
+//	else
+//	{
 		if ((k = flags_options(argv, &option)) == -1)
 			return (-1);
-	}
-	if (k == argc)
+//	}
+	else if (k == argc)
 		argv[--k] = ".";
 	parse(&in, argc, argv, k);
 	return (0);

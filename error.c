@@ -11,14 +11,23 @@
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-
-void		ft_dir_error(char *file)
+/*
+void		ft_stat_error(char *file)
 {
 	ft_putstr_fd("ls: ", 2);
 	ft_putstr_fd(file, 2);
 	ft_putendl_fd(strerror(errno), 2);
 }
-
+*/
+void		ft_dir_error(char *file)
+{
+	ft_putstr_fd("ls: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putchar_fd(' ', 2);
+//	ft_putendl_fd(strerror(ENOTDIR), 2);
+	ft_putendl_fd(strerror(errno), 2);
+	exit(EXIT_FAILURE);
+}
 
 void		ft_error(char option)
 {
@@ -27,4 +36,5 @@ void		ft_error(char option)
 	ft_putchar_fd('\n', 2);
 	ft_putendl_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1]\
 						[file ...]" , 2);
+	exit(EXIT_FAILURE);
 }
