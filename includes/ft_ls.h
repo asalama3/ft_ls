@@ -26,8 +26,6 @@
 
 #include <stdio.h>
 
-# define EXIT_SUCCESS 0
-# define EXIT_FAILURE 1
 
 
 typedef struct		s_init
@@ -49,7 +47,9 @@ typedef struct		s_flags
 
 typedef struct		s_lst
 {
-	char			*file;
+//	t_flags         *flags;
+	t_init			*init;
+    char			*file;
 	struct s_lst	*next;
 	struct s_lst	*prev;
 }					t_lst;
@@ -60,6 +60,8 @@ int					parse(t_init *in, int argc, char **argv, int k);
 void				ft_error(char option);
 void				ft_dir_error(char *file);
 void				ft_stat_error(char *file);
+int					add_link(t_lst **lst, t_init *in, char *file);
+
 
 
 #endif
