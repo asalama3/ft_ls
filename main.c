@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/03/25 19:50:17 by asalama          ###   ########.fr       */
+/*   Updated: 2016/03/30 19:45:54 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int			main(int argc, char **argv)
 	t_flags		option;
 	t_init		in;
 	int			k;
+	t_arg		arg;
 
 	k = 1;
 	if ((k = flags_options(argv, &option)) == -1)
@@ -60,6 +61,7 @@ int			main(int argc, char **argv)
 	else if (k == argc)
 		argv[--k] = ".";
 	parse(&in, argc, argv, k);
+	if ()
 	return (0);
 }
 
