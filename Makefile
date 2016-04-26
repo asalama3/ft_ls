@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/03/23 17:54:23 by asalama          ###   ########.fr        #
+#    Updated: 2016/04/19 12:48:05 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,12 @@ CFLAGS = -Wall -Werror -Wextra
 
 
 SRC = main.c		\
+	  error.c		\
+	  list.c		\
+	  list_dir.c	\
+	  parse.c		\
+	  sexy.c		\
+
 
 OBJ = $(addprefix $(OBJ_PATH), $(SRC:%.c=%.o))
 
