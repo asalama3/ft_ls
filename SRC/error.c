@@ -6,11 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 12:38:06 by asalama           #+#    #+#             */
-/*   Updated: 2016/03/24 17:18:41 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/12 14:37:58 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_ls.h"
+#include "../Includes/ft_ls.h"
 /*
 void		ft_stat_error(char *file)
 {

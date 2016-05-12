@@ -6,88 +6,92 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/04/19 12:46:15 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/12 22:09:37 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_ls.h"
+#include "../Includes/ft_ls.h"
 
 
-int			flags_options(char **argv, t_flags *option)
+int			get_options(char c, t_flags *option)
+{
+	if (c == 'R')
+		option->cap_r = 1;
+	else if (c == 'r')
+		option->r = 1;
+	else if (c == 'a')
+		option->a = 1;
+	else if (c == 't')
+		option->t = 1;
+	else if (c == 'l')
+		option->l = 1;
+	else
+		ft_error(c);
+	return (0);
+}
+
+void		print_av_list(t_arg **lst)
+{
+	t_arg		*runner;
+
+	if (*lst)
+	{
+		runner = *lst;
+		ft_putendl("///////ARGV LIST //////////");
+		while (runner)
+		{
+			printf("%s\n", (runner->name));
+			runner = runner->next;
+		}
+		write(1, "\n", 1);
+	}
+}
+
+int			flags(char **argv, t_flags *option, t_arg *arg_lst)
 {
 	int		i;
 	int		j;
 
 	i = 1;
-	while (argv[i] && argv[i][0] == '-')
+	while (argv[i])
 	{
-		j = 1;
-		while (argv[i][j])
+		if (argv[i][0] == '-' && argv[i][1])
 		{
-			if (argv[i][j] == 'R')
-				option->R = 1;
-			else if (argv[i][j] == 'r')
-				option->r = 1;
-			else if (argv[i][j] == 'a')
-				option->a = 1;
-			else if (argv[i][j] == 't')
-				option->t = 1;
-			else if (argv[i][j] == 'l')
-				option->l = 1;
-			else
+			j = 1;
+			while (argv[i][j])
 			{
-				ft_error(argv[i][j]);
-				return (-1);
+				if (get_options(argv[i][j], option) == -1)
+					return (-1);
+				j++;
 			}
-			j++;
+		}
+		else
+		{
+			get_av_list(&argv[i], option);
 		}
 		i++;
 	}
-	printf("%d\n", i);
-	return (i);
+//	if (!list_len(argv[i]))
+//		get_av_list("./", &option);
+	print_av_list(&arg_lst);
+	return (0);
 }
-
-
 int			main(int argc, char **argv)
 {
 	t_flags		option;
-	t_init		in;
-	int			k;
-//	t_arg		arg;
+//	int			k;
+	t_arg		arg_lst;
 
-	k = 1;
-	if ((k = flags_options(argv, &option)) == -1)
-		return (-1);
-	else if (k == argc)
-		argv[--k] = ".";
-	parse(&in, argc, argv, k);
+//	k = 1;
+//	if ((k = flags_options(argv, &option)) == -1)
+//		return (-1);
+//	else if (k == argc)
+//		argv[--k] = ".";
+	if (argc >= 1)
+	{
+		if (flags(argv, &option, &arg_lst) == -1)
+			return (-1);
+	}
+//	ls(&in, argc, argv, k);
 	return (0);
 }
-
-
-/*
-int			main(int argc, char **argv)
-{
-	int				i;
-	char			*tmp;
-	char			*dir;
-	struct dirent	*ptr;
-
-	tmp = "./";
-	i = 1;
-	while (argc)
-	{
-		if (argc == 1)
-			dir = tmp;
-		else
-			dir = argv[i];
-		if (!(tmp = opendir(argv[i])))
-			return (-1);
-		while ((ptr = readdir(tmp)))
-		{
-			//appeler fonctions: flags
-		}
-		i++;
-	}
-	return (0);
-}*/

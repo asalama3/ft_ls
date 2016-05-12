@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 13:08:10 by asalama           #+#    #+#             */
-/*   Updated: 2016/04/19 12:48:57 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/11 12:11:05 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include "../includes/ft_ls.h"
+
 
 int		main(int argc, char **argv)
 {

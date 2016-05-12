@@ -6,11 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 13:11:26 by asalama           #+#    #+#             */
-/*   Updated: 2016/03/30 19:45:52 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/12 14:37:46 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_ls.h"
+#include "ft_ls.h"
 
 
 void	print(t_arg **arg)
@@ -38,7 +38,7 @@ int		ft_stat(t_arg **arg, t_init *in, char *argv)
 		if (S_ISREG(in->buf->st_mode))
 			printf("%s\n", argv);
 //			printf("%li", in->buf->st_mtime);
-	add_link_arg(arg, in, argv);
+//	add_link_arg(arg, in, argv);
 	return (0);
 }
 

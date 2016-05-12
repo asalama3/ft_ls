@@ -6,11 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 14:32:06 by asalama           #+#    #+#             */
-/*   Updated: 2016/03/30 19:45:58 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/11 11:20:07 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/ft_ls.h"
+#include "ft_ls.h"
 
 int         add_link(t_lst **lst, t_init *in, char *file)
 {

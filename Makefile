@@ -10,38 +10,39 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ls
+NAME = ft_ls
 
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
+SRC_PATH = ./SRC/
 
-SRC = main.c		\
-	  error.c		\
-	  list.c		\
-	  list_dir.c	\
-	  parse.c		\
-	  sexy.c		\
+SRC_NAME = main.c		\
+		   argv_list.c	\
+		   list_tools.c	\
+		   error.c		\
+			
 
+SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
-OBJ = $(addprefix $(OBJ_PATH), $(SRC:%.c=%.o))
+OBJ_PATH = ./OBJ/
+
+OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:%.c=%.o))
 
 HEADER_PATH = -I includes/
 
 LIBFT_PATH = libft/libft.a
 
-OBJ_PATH = ./OBJ/
-
 .PHONY: clean fclean re all
 
-all: $(SRC) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(SRC)
 	@$(MAKE) -C libft
 	@$(CC) $(OBJ) $(LIBFT_PATH) -o $(NAME)
 
-$(OBJ_PATH)%.o : %.c
+$(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@echo "\033[1;32m" "Compiling $< into $@" "\033[0m"
 	@mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(HEADER_PATH) -c $< -o $@
