@@ -6,11 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/12 22:09:37 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/13 17:11:08 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/ft_ls.h"
+#include "ft_ls.h"
 
 
 int			get_options(char c, t_flags *option)
@@ -40,7 +40,7 @@ void		print_av_list(t_arg **lst)
 		ft_putendl("///////ARGV LIST //////////");
 		while (runner)
 		{
-			printf("%s\n", (runner->name));
+			printf("file: %s\n", runner->name);
 			runner = runner->next;
 		}
 		write(1, "\n", 1);
@@ -67,7 +67,8 @@ int			flags(char **argv, t_flags *option, t_arg *arg_lst)
 		}
 		else
 		{
-			get_av_list(&argv[i], option);
+			ft_putendl("aaaa");
+			get_av_list(&argv[i], option, arg_lst);
 		}
 		i++;
 	}
@@ -76,20 +77,23 @@ int			flags(char **argv, t_flags *option, t_arg *arg_lst)
 	print_av_list(&arg_lst);
 	return (0);
 }
+
 int			main(int argc, char **argv)
 {
 	t_flags		option;
 //	int			k;
-	t_arg		arg_lst;
+	t_arg		*arg_lst;
 
 //	k = 1;
 //	if ((k = flags_options(argv, &option)) == -1)
 //		return (-1);
 //	else if (k == argc)
 //		argv[--k] = ".";
+	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
+		return (-1);
 	if (argc >= 1)
 	{
-		if (flags(argv, &option, &arg_lst) == -1)
+		if (flags(argv, &option, arg_lst) == -1)
 			return (-1);
 	}
 //	ls(&in, argc, argv, k);

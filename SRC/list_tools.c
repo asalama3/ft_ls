@@ -1,4 +1,16 @@
-#include "../Includes/ft_ls.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_tools.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/05/13 13:41:01 by asalama           #+#    #+#             */
+/*   Updated: 2016/05/13 17:11:13 by asalama          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_ls.h"
 
 int		list_len(t_arg **lst)
 {
@@ -8,12 +20,12 @@ int		list_len(t_arg **lst)
 	if (*lst)
 	{
 		n = 0;
-		printf("%d\n", n);
 		runner = *lst;
 		while (runner)
 		{
 			n++;
 			runner = runner->next;
+			printf("lst count: %d\n", n);
 		}
 		return (n);
 	}
