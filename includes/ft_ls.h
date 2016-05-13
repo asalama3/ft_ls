@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/13 17:11:17 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/13 19:16:37 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct		s_arg
 }					t_arg;
 
 
-int					get_av_list(char **argv, t_flags *option, t_arg *arg_lst);
+int					get_av_list(char **argv, t_flags option, t_arg *arg_lst);
 void				ft_error(char option);
 int					list_len(t_arg **lst);
 void				push_front(t_arg **lst, t_arg *new);

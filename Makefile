@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/04/19 12:48:05 by asalama          ###   ########.fr        #
+#    Updated: 2016/05/13 19:05:22 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,13 @@ NAME = ft_ls
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 SRC_PATH = ./SRC/
 
 SRC_NAME = main.c		\
-		   argv_list.c	\
+		   error.c		\
+#		   argv_list.c	\
 		   list_tools.c	\
 		   error.c		\
 			

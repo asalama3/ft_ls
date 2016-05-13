@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/13 17:11:08 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/13 19:32:10 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,24 @@ int			get_options(char c, t_flags *option)
 	return (0);
 }
 
-void		print_av_list(t_arg **lst)
+void		print_av_list(t_arg *lst)
 {
 	t_arg		*runner;
 
-	if (*lst)
+	if (lst != NULL)
 	{
-		runner = *lst;
+		runner = lst;
 		ft_putendl("///////ARGV LIST //////////");
 		while (runner)
 		{
-			printf("file: %s\n", runner->name);
+			ft_putendl(runner->name);
 			runner = runner->next;
 		}
 		write(1, "\n", 1);
 	}
 }
 
-int			flags(char **argv, t_flags *option, t_arg *arg_lst)
+int			flags(char **argv, t_flags *option)
 {
 	int		i;
 	int		j;
@@ -66,36 +66,36 @@ int			flags(char **argv, t_flags *option, t_arg *arg_lst)
 			}
 		}
 		else
-		{
-			ft_putendl("aaaa");
-			get_av_list(&argv[i], option, arg_lst);
-		}
+			return (i);
 		i++;
 	}
-//	if (!list_len(argv[i]))
-//		get_av_list("./", &option);
-	print_av_list(&arg_lst);
 	return (0);
+}
+
+void			check_flags(t_flags option)
+{
+	printf("flag -l: %i\n", option.l);
+	printf("flag -r: %i\n", option.r);
+	printf("flag -a: %i\n", option.a);
+	printf("flag -t: %i\n", option.t);
+	printf("flag -cap_r: %i\n", option.cap_r);
 }
 
 int			main(int argc, char **argv)
 {
 	t_flags		option;
-//	int			k;
 	t_arg		*arg_lst;
+	int			ret;
 
-//	k = 1;
-//	if ((k = flags_options(argv, &option)) == -1)
-//		return (-1);
-//	else if (k == argc)
-//		argv[--k] = ".";
 	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
 		return (-1);
 	if (argc >= 1)
 	{
-		if (flags(argv, &option, arg_lst) == -1)
+		if ((ret = flags(argv, &option)) == -1)
 			return (-1);
+		check_flags(option);
+//		if (ft_ls(argv + ret, option) == -1)
+//			return (-1);
 	}
-//	ls(&in, argc, argv, k);
 	return (0);
 }
