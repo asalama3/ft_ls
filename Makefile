@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/05/13 19:05:22 by asalama          ###   ########.fr        #
+#    Updated: 2016/05/17 17:58:00 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ SRC_PATH = ./SRC/
 
 SRC_NAME = main.c		\
 		   error.c		\
-#		   argv_list.c	\
-		   list_tools.c	\
+		   argv_list.c	\
+		   print.c		\
+#		   list_tools.c	\
 		   error.c		\
 			
 
@@ -46,7 +47,7 @@ $(NAME): $(OBJ) $(SRC)
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@echo "\033[1;32m" "Compiling $< into $@" "\033[0m"
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(HEADER_PATH) -c $< -o $@
+	@$(CC) $(HEADER_PATH) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ_PATH)

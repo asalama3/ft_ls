@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/13 19:16:37 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/17 17:23:09 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 #include <stdio.h>
 
-
 /*
 typedef struct		s_init
 {
@@ -34,9 +33,6 @@ typedef struct		s_init
 	struct stat		*buf;
 }					t_init;
 */
-
-
-
 typedef struct stat		t_stat;
 
 typedef struct dirent	t_dirent;
@@ -82,11 +78,14 @@ typedef struct		s_arg
 }					t_arg;
 
 
-int					get_av_list(char **argv, t_flags option, t_arg *arg_lst);
+//int					get_av_list(char **argv, t_flags option, t_arg *arg_lst);
 void				ft_error(char option);
 int					list_len(t_arg **lst);
 void				push_front(t_arg **lst, t_arg *new);
 void				push_back(t_arg *runner, t_arg *new);
+void				print_av_list(t_arg *lst);
+int					ft_ls(char **argv, t_flags option);
+void					link_arg(t_arg *link, t_arg **arg_lst);
 //int					parse(t_init *in, int argc, char **argv, int k);
 //void				ft_dir_error(char *file);
 //void				ft_stat_error(char *file);

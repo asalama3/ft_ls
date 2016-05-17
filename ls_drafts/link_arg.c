@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/30 14:32:06 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/11 14:10:10 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/17 12:31:05 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int         add_link_arg(t_arg **arg, t_init *in, char *file)
 	return (0);
 }
 
-
+/*
 int			sort_alpha(t_arg **arg)
 {
 	t_arg	*runner;
@@ -92,4 +92,4 @@ int			sort_time(t_arg **arg)
 	else
 		return (-1);
 	return (0);
-}
+}*/

@@ -6,12 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/13 19:32:10 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/17 17:57:34 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
 
 int			get_options(char c, t_flags *option)
 {
@@ -28,23 +27,6 @@ int			get_options(char c, t_flags *option)
 	else
 		ft_error(c);
 	return (0);
-}
-
-void		print_av_list(t_arg *lst)
-{
-	t_arg		*runner;
-
-	if (lst != NULL)
-	{
-		runner = lst;
-		ft_putendl("///////ARGV LIST //////////");
-		while (runner)
-		{
-			ft_putendl(runner->name);
-			runner = runner->next;
-		}
-		write(1, "\n", 1);
-	}
 }
 
 int			flags(char **argv, t_flags *option)
@@ -84,18 +66,18 @@ void			check_flags(t_flags option)
 int			main(int argc, char **argv)
 {
 	t_flags		option;
-	t_arg		*arg_lst;
+//	t_arg		*arg_lst;
 	int			ret;
 
-	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
-		return (-1);
+//	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
+//		return (-1);
 	if (argc >= 1)
 	{
 		if ((ret = flags(argv, &option)) == -1)
 			return (-1);
 		check_flags(option);
-//		if (ft_ls(argv + ret, option) == -1)
-//			return (-1);
+		if (ft_ls(argv + ret, option) == -1)
+			return (-1);
 	}
 	return (0);
 }
