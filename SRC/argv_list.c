@@ -6,13 +6,13 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/17 17:57:31 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/18 14:57:26 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			link_arg(t_arg *link, t_arg **arg_lst)
+void			create_link_arg(t_arg *link, t_arg **arg_lst)
 {
 	t_arg		*runner;
 
@@ -33,7 +33,7 @@ void			link_arg(t_arg *link, t_arg **arg_lst)
 		}
 }
 
-static int		call_stat(t_arg *link, char *file, t_flags *option, t_arg **arg_lst)
+static int		check_stat(t_arg *link, char *file, t_flags *option, t_arg **arg_lst)
 {
 	if (!(link->buf = (t_stat*)ft_memalloc(sizeof(t_stat))))
 	{
@@ -55,11 +55,10 @@ static int		call_stat(t_arg *link, char *file, t_flags *option, t_arg **arg_lst)
 		perror("error malloc");
 		exit(EXIT_FAILURE);
 	}
-//	ft_putendl("OKKKKKKKK");
 	return (0);
 }
 
-t_arg		*get_av_list(char **argv, t_flags option, t_arg **arg_lst)
+t_arg		*link_malloc(char **argv, t_flags option, t_arg **arg_lst)
 {
 	t_arg		*link;
 	
@@ -77,21 +76,23 @@ int		ft_ls(char **argv, t_flags option)
 	t_arg	*link;
 
 	arg_lst = NULL;
+	// Malloc create seg fault//
 //	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
 //		return (-1);
 	while (*argv != NULL)
 	{
-		ft_putendl("-----");
-		if ((link = get_av_list(argv, option, &arg_lst)) == NULL)
+//		ft_putendl("-----");
+		if ((link = link_malloc(argv, option, &arg_lst)) == NULL)
 			return (-1);
-		if (call_stat(link, *argv, &option, &arg_lst) == -1)
+		if (check_stat(link, *argv, &option, &arg_lst) == -1)
 		{
 			//error_list();
 			return (-1);
 		}
-		link_arg(link, &arg_lst);
+		create_link_arg(link, &arg_lst);
 		argv++;
 	}
-	print_av_list(arg_lst);
+	!option.t ? arg_sort_alpha(&arg_lst, link) : arg_sort_time(&arg_lst, link);
+	print_arg_list(arg_lst);
 	return (0);
 }

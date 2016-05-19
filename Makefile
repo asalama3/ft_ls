@@ -22,8 +22,8 @@ SRC_NAME = main.c		\
 		   error.c		\
 		   argv_list.c	\
 		   print.c		\
-#		   list_tools.c	\
-		   error.c		\
+		   sort.c		\
+		   list_tools.c	\
 			
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
