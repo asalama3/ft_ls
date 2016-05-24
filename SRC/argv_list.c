@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/24 12:56:18 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/24 17:39:45 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_ls(char **argv, t_flags option)
 		create_link_arg(link, &arg_lst);
 		argv++;
 	}
-	!option.t ? arg_sort_alpha(&arg_lst, link) : arg_sort_time(&arg_lst, link);
+	!option.t ? arg_sort_alpha_bis(&arg_lst) : arg_sort_time(&arg_lst, link);
 	print_arg_list(arg_lst);
 	return (0);
 }

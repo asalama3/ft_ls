@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/24 12:56:23 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/24 17:39:43 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,29 @@
 
 #include "ft_ls.h"
 
-void			arg_sort_alpha(t_arg **arg_lst)
+void			arg_sort_alpha_bis(t_arg **arg_lst)
 {
 	t_arg	*runner;
-	
+	t_arg	*tmp;
 
+	runner = *arg_lst;
+	tmp = runner->next;
+	runner->next = NULL;
+	runner->prev = NULL;
+	
+	while (runner != NULL)
+	{
+		//2eme boucle while tant que ma 2eme liste nest pas finie)
+		if (ft_strcmp(runner->name, tmp->name) > 0)
+		{
+			tmp->next = runner;
+			tmp->prev = runner->prev;
+			tmp->prev->next = tmp;
+			runner->prev = tmp;
+		}
+		else
+			runner = runner->next;
+	}
 }
 
 /*void			arg_sort_alpha(t_arg **arg_lst, t_arg *new)
