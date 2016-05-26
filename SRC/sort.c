@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/25 18:19:07 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/26 17:00:51 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,55 @@
 
 #include "ft_ls.h"
 
-void			arg_sort_alpha_bis(t_arg **arg_lst)
+void			arg_sort_alpha_bis(t_arg **old_lst)
 {
 	t_arg	*runner;
 	t_arg	*tmp;
+	t_arg	*new_lst;
 
-	runner = *arg_lst;
-	tmp = runner->next;
+	runner = *old_lst;
+	*old_lst = (*old_lst)->next;
+	new_lst = runner;
 	runner->next = NULL;
 	runner->prev = NULL;
 	
-	while (runner != NULL)
+	while (*old_lst != NULL)
 	{
+		tmp = *old_lst;
+		*old_lst = (*old_lst)->next;
 		while (runner != NULL)
 		{
-			//tant que ma 2eme liste nest pas finie..
-			// si runner->prev == NULL?? crash
-			// si runner->next == NULL?? crash
 			if (ft_strcmp(runner->name, tmp->name) > 0)
 			{
-				ft_putendl("front");
 				if (runner->prev == NULL)
 				{
 					tmp->prev = NULL;
 					tmp->next = runner;
 					runner->prev = tmp;
+					new_lst = runner;
 				}
-				tmp->next = runner;
-				tmp->prev = runner->prev;
-				tmp->prev->next = tmp;
-				runner->prev = tmp;
+				else
+				{
+					tmp->next = runner;
+					tmp->prev = runner->prev;
+					tmp->prev->next = tmp;
+					runner->prev = tmp;
+				}
+				break ;
 			}
 			else
 			{
 				runner = runner->next;
-				ft_putendl("back");
-				if (runner->next == NULL)
+				if (runner == NULL)
 				{
 					tmp->next = NULL;
 					tmp->prev = runner;
 					runner->next = tmp;
+					break ;
 				}
-//				tmp->next = runner->next;
-//				tmp->prev = runner;
-//				runner->next->prev = tmp;
-//				tmp->next->prev = tmp;
-//				runner->next = tmp;
-//				runner = runner->next;
 			}
-			// pointe sur le debut de la liste ?
-//			runner = *arg_lst;
-//			runner = runner->next;
+			runner = new_lst;
 		}
-		runner = runner->next;
 	}
 }
 
