@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/26 17:00:54 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/27 18:07:33 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ int		ft_ls(char **argv, t_flags option)
 	t_arg	*link;
 
 	arg_lst = NULL;
-	// Malloc create seg fault//
-//	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
-//		return (-1);
 	while (*argv != NULL)
 	{
 //		ft_putendl("-----");
@@ -92,7 +89,8 @@ int		ft_ls(char **argv, t_flags option)
 		create_link_arg(link, &arg_lst);
 		argv++;
 	}
-	!option.t ? arg_sort_alpha_bis(&arg_lst) : arg_sort_time(&arg_lst, link);
+	//creer fonction sort pour appeler les fonctions en fonction des flags//
+	!option.t ? arg_sort_alpha_bis(&arg_lst) : arg_sort_time(&arg_lst);
 	print_arg_list(arg_lst);
 	return (0);
 }

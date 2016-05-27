@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/24 12:56:25 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/27 16:10:49 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,8 @@ void			check_flags(t_flags option)
 int			main(int argc, char **argv)
 {
 	t_flags		option;
-//	t_arg		*arg_lst;
 	int			ret;
 
-//	if (!(arg_lst = (t_arg*)ft_memalloc(sizeof(t_arg))))
-//		return (-1);
 	if (argc >= 1)
 	{
 		if ((ret = flags(argv, &option)) == -1)

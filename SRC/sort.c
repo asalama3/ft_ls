@@ -6,12 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/26 17:00:51 by asalama          ###   ########.fr       */
+/*   Updated: 2016/05/27 18:07:30 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-//fonction sort alpha
+// fonction sort alpha
 // fonction sort time
 // fonction sort files and dir
 // fonction sort reverse
@@ -38,36 +37,29 @@ void			arg_sort_alpha_bis(t_arg **old_lst)
 		{
 			if (ft_strcmp(runner->name, tmp->name) > 0)
 			{
-				if (runner->prev == NULL)
-				{
-					tmp->prev = NULL;
-					tmp->next = runner;
-					runner->prev = tmp;
-					new_lst = runner;
-				}
+				push_front(runner, tmp);
+//				tmp->next = runner;
+//				tmp->prev = runner->prev;
+//				runner->prev = tmp;
+				if (tmp->prev == NULL)
+					new_lst = tmp;
 				else
-				{
-					tmp->next = runner;
-					tmp->prev = runner->prev;
 					tmp->prev->next = tmp;
-					runner->prev = tmp;
-				}
 				break ;
 			}
-			else
+			else if (runner->next == NULL)
 			{
-				runner = runner->next;
-				if (runner == NULL)
-				{
-					tmp->next = NULL;
-					tmp->prev = runner;
-					runner->next = tmp;
-					break ;
-				}
+				push_back(runner, tmp);
+//				tmp->next = NULL;
+//				tmp->prev = runner;
+//				runner->next = tmp;
+				break ;
 			}
-			runner = new_lst;
+			runner = runner->next;
 		}
+		runner = new_lst;
 	}
+	*old_lst = new_lst;
 }
 
 
@@ -106,7 +98,7 @@ void			arg_sort_alpha_bis(t_arg **old_lst)
 */
 
 
-void			arg_sort_time(t_arg **arg_lst, t_arg *link)
+void			arg_sort_time(t_arg **arg_lst)
 {
 
 }
