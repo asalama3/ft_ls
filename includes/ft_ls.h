@@ -25,14 +25,6 @@
 
 #include <stdio.h>
 
-/*
-typedef struct		s_init
-{
-	struct dirent	*ptr;
-	DIR				*dir;
-	struct stat		*buf;
-}					t_init;
-*/
 typedef struct stat		t_stat;
 
 typedef struct dirent	t_dirent;
@@ -66,7 +58,6 @@ typedef struct		s_err
 
 typedef struct		s_arg
 {
-//	t_init			*init;
 //	t_dirent		*sd;
 	t_stat			*buf;
 	DIR				*dir;
@@ -78,24 +69,22 @@ typedef struct		s_arg
 }					t_arg;
 
 
-//int					get_av_list(char **argv, t_flags option, t_arg *arg_lst);
+/* -------------ERROR ---------------- */
 void				ft_error(char option);
+
+/* -----------LIST_TOOlS -------------- */
 int					list_len(t_arg **lst);
 void				push_front(t_arg *runner, t_arg *tmp);
 void				push_back(t_arg *runner, t_arg *tmp);
+void				push_insert(t_arg *tmp);
 void				print_arg_list(t_arg *lst);
+
+/* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
 void				create_link_arg(t_arg *link, t_arg **arg_lst);
-void				arg_sort_alpha_bis(t_arg **arg_lst);
-void				arg_sort_time(t_arg **arg_lst);
-//int					parse(t_init *in, int argc, char **argv, int k);
-//void				ft_dir_error(char *file);
-//void				ft_stat_error(char *file);
-//int					add_link(t_lst **lst, t_init *in, char *file);
-//int					sort_alpha(t_list **list);
-//int					sort_time(t_lst **lst);
-//int					add_link_arg(t_arg **arg, t_init *in, char *file);
-//int					sort_alpha(t_arg **arg);
-//int					sort_time(t_arg **arg);
+
+/* -------------LIST_SORT --------------- */
+void				sort_flags(t_flags *option, t_arg **arg_lst);
+void				arg_sort_alpha(t_arg **arg_lst);
 
 #endif

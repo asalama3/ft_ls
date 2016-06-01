@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:41:01 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/27 18:07:28 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/01 13:49:11 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ void	push_front(t_arg *runner, t_arg *tmp)
 
 void	push_back(t_arg *runner, t_arg *tmp)
 {
+//	printf("%s     TMP-PUSH-BACK\n", tmp->name);
+	printf("%s     RUNNER-PUSH-BACK\n", runner->name);
 	tmp->next = NULL;
 	tmp->prev = runner;
 	runner->next = tmp;
 }
 
-void	push_insert(t_arg *runner, t_arg *tmp)
+void	push_insert(t_arg *tmp)
 {
-
+	tmp->prev->next = tmp;
 }
