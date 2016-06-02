@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/27 18:05:26 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/02 18:54:27 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void				ft_error(char option);
 int					list_len(t_arg **lst);
 void				push_front(t_arg *runner, t_arg *tmp);
 void				push_back(t_arg *runner, t_arg *tmp);
+void				push_back_bis(t_arg *runner, t_arg **begin_lst);
 void				push_insert(t_arg *tmp);
+void				init_lst(t_arg *runner);
 void				print_arg_list(t_arg *lst);
 
 /* ---------------LS ------------------- */

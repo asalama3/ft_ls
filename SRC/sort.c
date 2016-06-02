@@ -6,49 +6,61 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/01 14:22:06 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/02 20:15:27 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+
+void			join_file_dir(t_arg **old_lst, t_arg *f_list)
+{
+	t_arg	*tmp;
+
+	tmp = f_list;
+	if (f_list != NULL)
+	{
+		while (f_list->next != NULL)
+			f_list = f_list->next;
+		f_list->next = *old_lst;
+		if (*old_lst != NULL)
+			(*old_lst)->prev = f_list;
+		(*old_lst) = tmp;
+	}
+}
+
 void			arg_sort_file_dir(t_arg **old_lst)
 {
 	t_arg	*f_list;
-//	t_arg	*d_list;
 	t_arg	*runner;
 	t_arg	*tmp;
 
 	runner = *old_lst;
-	*old_lst = (*old_lst)->next;
-
-	printf("%s  first-runner\n", runner->name);
-	while (*old_lst != NULL)
+	f_list = NULL;
+	while (runner != NULL && !S_ISDIR(runner->buf->st_mode))
 	{
-		if (!S_ISDIR(runner->buf->st_mode))
-		{
-			printf("%s  FILE_OK\n", runner->name);
-			f_list = runner;
-			runner->next = NULL;
-			runner->prev = NULL;
-		}
-		else
-			runner = runner->next;
-		tmp = *old_lst;
 		*old_lst = (*old_lst)->next;
-		printf("%s  TMP\n", tmp->name);
+		push_back_bis(runner, &f_list);
+		runner = *old_lst;
+	}
+	tmp = runner; 
+	while (tmp != NULL)
+	{
 		if (!S_ISDIR(tmp->buf->st_mode))
 		{
-			printf("%s  TMP-OK_FILE\n", tmp->name);
-			push_back(runner, tmp);
-//			tmp = runner;
-			runner = runner->next;
+			runner = tmp->next;
+			if (tmp->prev != NULL)
+				tmp->prev->next = tmp->next;
+			if (tmp->next != NULL)
+				tmp->next->prev = tmp->prev;
+			push_back_bis(tmp, &f_list);
+			tmp = runner;
 		}
-		runner = f_list;
+		else
+			tmp = tmp->next;
 	}
-	*old_lst = f_list;
+	join_file_dir(old_lst, f_list);
 }
-
 
 
 void			arg_sort_reverse(t_arg **old_lst)
@@ -60,8 +72,7 @@ void			arg_sort_reverse(t_arg **old_lst)
 	runner = *old_lst;
 	*old_lst = (*old_lst)->next;
 	new_lst = runner;
-	runner->next = NULL;
-	runner->prev = NULL;
+	init_lst(runner);
 
 	while (*old_lst != NULL)
 	{
