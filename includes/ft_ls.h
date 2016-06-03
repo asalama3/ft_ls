@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/02 18:54:27 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/03 19:55:02 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct		s_err
 	char			*file;
 	int				error;
 	struct s_err	*next;
-	struct s_eff	*prev;
+	struct s_err	*prev;
 }					t_err;
 
 typedef struct		s_arg
@@ -71,13 +71,14 @@ typedef struct		s_arg
 
 /* -------------ERROR ---------------- */
 void				ft_error(char option);
+void				error_list(char *link, t_err **error_lst, int error);
 
 /* -----------LIST_TOOlS -------------- */
 int					list_len(t_arg **lst);
-void				push_front(t_arg *runner, t_arg *tmp);
-void				push_back(t_arg *runner, t_arg *tmp);
-void				push_back_bis(t_arg *runner, t_arg **begin_lst);
-void				push_insert(t_arg *tmp);
+void				position_front(t_arg *runner, t_arg *tmp);
+void				position_back(t_arg *runner, t_arg *tmp);
+void				push_back(t_arg *runner, t_arg **begin_lst);
+void				position_insert(t_arg *tmp);
 void				init_lst(t_arg *runner);
 void				print_arg_list(t_arg *lst);
 
@@ -88,5 +89,5 @@ void				create_link_arg(t_arg *link, t_arg **arg_lst);
 /* -------------LIST_SORT --------------- */
 void				sort_flags(t_flags *option, t_arg **arg_lst);
 void				arg_sort_alpha(t_arg **arg_lst);
-
+void				arg_sort_file_dir(t_arg **old_lst);
 #endif

@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/05/17 17:58:00 by asalama          ###   ########.fr        #
+#    Updated: 2016/06/03 18:35:16 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,15 @@ CFLAGS = -Wall -Werror -Wextra -g3
 
 SRC_PATH = ./SRC/
 
-SRC_NAME = main.c		\
-		   error.c		\
-		   argv_list.c	\
-		   print.c		\
-		   sort.c		\
-		   list_tools.c	\
-			
+SRC_NAME = main.c				\
+		   error.c				\
+		   argv_list.c			\
+		   print.c				\
+		   sort.c				\
+		   list_tools.c			\
+		   position.c			\
+		   sort_file_dir.c		\
+		   error_list.c			\
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

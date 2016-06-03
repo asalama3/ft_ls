@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/02 20:15:34 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/03 19:54:09 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		ft_ls(char **argv, t_flags option)
 			return (-1);
 		if (check_stat(link, *argv) == -1)
 		{
-			//error_list();
+			error_list(*argv, error_lst, errno);
 			return (-1);
 		}
 		create_link_arg(link, &arg_lst);
