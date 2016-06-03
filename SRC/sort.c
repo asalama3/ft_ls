@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/02 20:15:27 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/03 10:01:08 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,33 +170,28 @@ void			arg_sort_alpha(t_arg **old_lst)
 
 void			sort_flags(t_flags *option, t_arg **arg_lst)
 {
-/*	if (option->r)
+	if (option->r)
 	{
 		if (option->t)
 		{
-			arg_sort_time();
-			arg_sort_reverse();
-			DIR - FILE;
+			arg_sort_time(arg_lst);
+			arg_sort_reverse(arg_lst);
 		}
 		else
 		{
-			arg_sort_reverse();
-			DIR - FILE;
+			arg_sort_reverse(arg_lst);
 		}
 	}
 	else if (option->t)
+		arg_sort_time(arg_lst);
+	else
 	{
-		arg_sort_time();
-		DIR - FILE;
+		if (!option->t)
+		{
+			arg_sort_alpha(arg_lst);
+			arg_sort_file_dir(arg_lst);
+		}
+		else
+			arg_sort_time(arg_lst);
 	}
-	else*/
-	if (option->r)
-//		arg_sort_reverse(arg_lst);
-//	else if (!option->t)
-//	{
-//		arg_sort_alpha(arg_lst);
-		arg_sort_file_dir(arg_lst);
-//	}
-//	else
-//		arg_sort_time(arg_lst);
 }
