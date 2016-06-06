@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/05 08:10:54 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/06 20:41:11 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ static int		check_stat(t_arg *link, char *file)
 		perror("error malloc");
 		exit(EXIT_FAILURE);
 	}
-	if ((stat(file, link->buf)) == -1)
+	if ((lstat(file, link->buf)) == -1)
 	{
 		free(link->buf);
-		free(link);
-		return (-1);
+		link->buf = NULL;
 	}
 	if ((!(link->path = ft_strdup(file))) || (!(link->name = ft_strdup(file))))
 	{
@@ -70,42 +69,25 @@ t_arg		*link_malloc()
 	return (link);
 }
 
-t_err		*error_malloc()
-{
-	t_err	*error_lst;
-
-	if (!(error_lst = (t_err*)ft_memalloc(sizeof(t_err))))
-	{
-		perror("error malloc");
-		exit(EXIT_FAILURE);
-	}
-	return (error_lst);
-}
-
 int		ft_ls(char **argv, t_flags option)
 {
 	t_arg	*arg_lst;
 	t_arg	*link;
-	t_err	*error_lst;
 
 	arg_lst = NULL;
 	while (*argv != NULL)
 	{
-//		ft_putendl("-----");
 		if ((link = link_malloc()) == NULL)
 			return (-1);
 		if (check_stat(link, *argv) == -1)
-		{
-			if ((error_lst = error_malloc()) == NULL)
-				return (-1);
-			error_list(*argv, &error_lst, errno);
-		}
+			return (-1);
 		else
 			create_link_arg(link, &arg_lst);
 		argv++;
 	}
-//	sort_flags(&option, &arg_lst);
-	//mettre print dans arg_list sinon seg fault;
-//	print_arg_list(arg_lst);
+	sort_flags(&option, &arg_lst);
+	error_list(&arg_lst);
+	arg_sort_file_dir(&arg_lst);
+	print_arg_list(arg_lst);
 	return (0);
 }

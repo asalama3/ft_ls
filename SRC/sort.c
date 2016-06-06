@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/03 19:55:04 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/06 20:41:13 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,4 @@ void			sort_flags(t_flags *option, t_arg **arg_lst)
 		arg_sort_alpha(arg_lst);
 	if (option->r)
 		arg_sort_reverse(arg_lst);
-	arg_sort_file_dir(arg_lst);
 }

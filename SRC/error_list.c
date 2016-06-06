@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 17:43:30 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/05 19:50:30 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/06 20:41:09 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,36 @@
 //}
 
 
-void		sort_alpha_error_lst(t_err **error_lst)
+void	error_list(t_arg **old_lst)
 {
-	t_err	*runner;
-	char	*file;
-	int		error;
+	t_arg	*runner;
+	t_arg	*error_lst;
+	t_arg	*tmp;
 
-	runner = *error_lst;
-		printf("%s SORT\n", runner->file);
-	while (runner->next != NULL)
+	runner = *old_lst;
+	error_lst = NULL;
+
+	while (runner != NULL && runner->buf == NULL)
 	{
-		printf("%s FILE\n", runner->file);
-		if (ft_strcmp(runner->file, runner->next->file) > 0)
+		*old_lst = (*old_lst)->next;
+		push_back(runner, &error_lst);
+		runner = *old_lst;
+	}
+	tmp = runner;
+	while (tmp != NULL)
+	{
+		if (tmp->buf == NULL)
 		{
-			file = runner->file;
-			error = runner->error;
-			runner->file = runner->next->file;
-			runner->error = runner->next->error;
-			runner->next->file =  file;
-			runner->next->error = error;
-			runner = *error_lst;
+			runner = tmp->next;
+			if (tmp->prev != NULL)
+				tmp->prev->next = tmp->next;
+			if (tmp->next != NULL)
+				tmp->next->prev = tmp->prev;
+			push_back(tmp, &error_lst);
+			tmp = runner;
 		}
-		runner = runner->next;
-	}
-	printf("%s \n", runner->file);
-}
-
-void		error_list(char *file, t_err **error_lst, int error)
-{
-	t_err	*runner;
-	t_err	*tmp;
-
-	if (!(runner = (t_err*)ft_memalloc(sizeof(t_err))))
-	{
-		perror("error maloc");
-		exit(EXIT_FAILURE);
-	}
-	runner->next = NULL;
-	runner->prev = NULL;
-	runner->file = file;
-	runner->error = errno;
-	if (*error_lst)
-	{
-		tmp = *error_lst;
-		while (tmp->next != NULL)
+		else
 			tmp = tmp->next;
-		tmp->next = runner;
-		runner->next = NULL;
-		runner->prev = runner;
 	}
-	else
-	{
-		*error_lst = runner;
-		runner->prev = NULL;
-		runner->next = NULL;
-	}
-	error = 0;
-		printf("%d \n", error);
-	sort_alpha_error_lst(error_lst);
-//	print_arg_list(error_lst);
+	print_arg_list(error_lst);
 }

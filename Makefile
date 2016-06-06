@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/06/03 18:35:16 by asalama          ###   ########.fr        #
+#    Updated: 2016/06/06 19:33:47 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ $(NAME): $(OBJ) $(SRC)
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@echo "\033[1;32m" "Compiling $< into $@" "\033[0m"
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(HEADER_PATH) -c $< -o $@
+	@$(CC) $(CFLAGS) $(HEADER_PATH) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ_PATH)
