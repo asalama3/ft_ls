@@ -49,7 +49,7 @@ $(NAME): $(OBJ) $(SRC)
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@echo "\033[1;32m" "Compiling $< into $@" "\033[0m"
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(HEADER_PATH) -c $< -o $@
+	@$(CC) $(HEADER_PATH) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ_PATH)

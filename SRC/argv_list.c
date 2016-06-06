@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/03 19:54:09 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/05 08:10:54 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,23 @@ t_arg		*link_malloc()
 	return (link);
 }
 
+t_err		*error_malloc()
+{
+	t_err	*error_lst;
+
+	if (!(error_lst = (t_err*)ft_memalloc(sizeof(t_err))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
+	return (error_lst);
+}
+
 int		ft_ls(char **argv, t_flags option)
 {
 	t_arg	*arg_lst;
 	t_arg	*link;
+	t_err	*error_lst;
 
 	arg_lst = NULL;
 	while (*argv != NULL)
@@ -83,13 +96,16 @@ int		ft_ls(char **argv, t_flags option)
 			return (-1);
 		if (check_stat(link, *argv) == -1)
 		{
-			error_list(*argv, error_lst, errno);
-			return (-1);
+			if ((error_lst = error_malloc()) == NULL)
+				return (-1);
+			error_list(*argv, &error_lst, errno);
 		}
-		create_link_arg(link, &arg_lst);
+		else
+			create_link_arg(link, &arg_lst);
 		argv++;
 	}
-	sort_flags(&option, &arg_lst);
-	print_arg_list(arg_lst);
+//	sort_flags(&option, &arg_lst);
+	//mettre print dans arg_list sinon seg fault;
+//	print_arg_list(arg_lst);
 	return (0);
 }
