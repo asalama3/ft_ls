@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/06 19:19:22 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/07 12:36:13 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,3 @@ void		print_arg_list(t_arg *lst)
 	write(1, "\n", 1);
 	}
 }
-
-/*void		print_arg_list_bis(t_err *lst)
-{
-	t_err	*runner;
-	
-	if (lst != NULL)
-	{
-	runner = lst;
-	ft_putendl("///////ARGV LIST //////////");
-	while (runner)
-	{
-		ft_putendl(runner->file);
-		runner = runner->next;
-	}
-	write(1, "\n", 1);
-	}
-}*/

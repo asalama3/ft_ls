@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/06 20:41:21 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/07 14:05:01 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct		s_arg
 /* -------------ERROR ---------------- */
 void				ft_error(char option);
 void				error_list(t_arg **old_lst);
+void				ft_stat_error(char *file);
 
 /* -----------LIST_TOOlS -------------- */
 int					list_len(t_arg **lst);

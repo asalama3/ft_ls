@@ -6,18 +6,23 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 17:43:30 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/06 20:41:09 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/07 12:35:41 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-//void		print_error_list(t_err **error_lst)
-//{
-	//print
-	//free
-//}
-
+void	print_error_list(t_arg **error_lst, t_arg *runner)
+{
+	if (error_lst)
+	{	runner = *error_lst;
+		while (runner)
+		{
+			ft_stat_error(runner->name);
+			runner = runner->next;
+		}
+	}
+}
 
 void	error_list(t_arg **old_lst)
 {
@@ -50,5 +55,6 @@ void	error_list(t_arg **old_lst)
 		else
 			tmp = tmp->next;
 	}
-	print_arg_list(error_lst);
+	printf("%p \n", runner);
+	print_error_list(&error_lst, runner);
 }
