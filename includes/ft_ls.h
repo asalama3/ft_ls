@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/07 14:05:01 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/08 18:54:19 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,13 @@ typedef struct		s_flags
 */
 typedef struct		s_arg
 {
-//	t_dirent		*sd;
+	t_dirent		*ptr;
 	t_stat			*buf;
 	DIR				*dir;
 	char			*path;
 	char			*name;
 	struct s_arg	*next;
 	struct s_arg	*prev;
-	struct s_arg	*new_list;
 }					t_arg;
 
 
@@ -91,4 +90,6 @@ void				create_link_arg(t_arg *link, t_arg **arg_lst);
 void				sort_flags(t_flags *option, t_arg **arg_lst);
 void				arg_sort_alpha(t_arg **arg_lst);
 void				arg_sort_file_dir(t_arg **old_lst);
+
+int					test_dir(t_arg **old_lst);
 #endif
