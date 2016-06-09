@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/08 18:54:19 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:42:31 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void				print_arg_list(t_arg *lst);
 
 /* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
+int					check_stat(t_arg *link, char *file);
+t_arg				*link_malloc();
 void				create_link_arg(t_arg *link, t_arg **arg_lst);
 
 /* -------------LIST_SORT --------------- */
@@ -91,5 +93,5 @@ void				sort_flags(t_flags *option, t_arg **arg_lst);
 void				arg_sort_alpha(t_arg **arg_lst);
 void				arg_sort_file_dir(t_arg **old_lst);
 
-int					test_dir(t_arg **old_lst);
+void				test_dir(t_arg **old_lst, t_flags *option);
 #endif

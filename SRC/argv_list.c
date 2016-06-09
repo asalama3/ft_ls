@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/08 18:53:56 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/09 17:42:28 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			create_link_arg(t_arg *link, t_arg **arg_lst)
 		}
 }
 
-static int		check_stat(t_arg *link, char *file)
+int			check_stat(t_arg *link, char *file)
 {
 	if (!(link->buf = (t_stat*)ft_memalloc(sizeof(t_stat))))
 	{
@@ -88,7 +88,7 @@ int		ft_ls(char **argv, t_flags option)
 	sort_flags(&option, &arg_lst);
 	error_list(&arg_lst);
 	arg_sort_file_dir(&arg_lst);
-//	test_dir(&arg_lst);
+	test_dir(&arg_lst, &option);
 	print_arg_list(arg_lst);
 	return (0);
 }
