@@ -6,7 +6,7 @@
 #    By: asalama <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 16:46:12 by asalama           #+#    #+#              #
-#    Updated: 2016/02/24 13:28:35 by asalama          ###   ########.fr        #
+#    Updated: 2016/06/10 16:15:21 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC		= ft_strlen.c		\
 		  ft_bzero.c		\
 		  ft_memcpy.c		\
 		  ft_strdup.c		\
+		  ft_strndup.c		\
 		  ft_strcpy.c		\
 		  ft_strncpy.c		\
 		  ft_strchr.c		\
