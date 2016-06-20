@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/09 17:42:34 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/20 21:26:24 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,17 @@ void		print_arg_list(t_arg *lst)
 	}
 	write(1, "\n", 1);
 	}
+}
+
+void		print_file(t_arg *runner)
+{
+	char	*tmp;
+
+	ft_putendl(runner->path);
+	if (!(tmp = ft_strdup(runner->path)))
+		exit(EXIT_FAILURE);
+	write (1, "\n", 1);
+	ft_putstr(tmp);
+	write (1, "\n", 1);
+	free (tmp);
 }

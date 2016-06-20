@@ -81,12 +81,14 @@ void				position_insert(t_arg *tmp);
 void				push_back(t_arg *runner, t_arg **begin_lst);
 void				init_lst(t_arg *runner);
 void				print_arg_list(t_arg *lst);
-
+void				print_file(t_arg *runner);
 /* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
 int					check_stat(t_arg *link, char *file);
 t_arg				*link_malloc();
 void				create_link_arg(t_arg *link, t_arg **arg_lst);
+//void				make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option);
+void				rec(t_arg **dir_lst, t_flags *option);
 
 /* -------------LIST_SORT --------------- */
 void				sort_flags(t_flags *option, t_arg **arg_lst);
