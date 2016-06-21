@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/09 17:42:31 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/21 16:49:37 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int					check_stat(t_arg *link, char *file);
 t_arg				*link_malloc();
 void				create_link_arg(t_arg *link, t_arg **arg_lst);
 //void				make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option);
-void				rec(t_arg **dir_lst, t_flags *option);
+void				rec(t_arg *dir_lst, t_flags *option);
 
 /* -------------LIST_SORT --------------- */
 void				sort_flags(t_flags *option, t_arg **arg_lst);
