@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/06/08 12:53:34 by asalama          ###   ########.fr        #
+#    Updated: 2016/06/22 15:14:34 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC_NAME = main.c				\
 		   sort_file_dir.c		\
 		   error_list.c			\
 		   recursive.c			\
+		   l_option.c			\
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

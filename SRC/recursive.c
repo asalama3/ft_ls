@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/21 16:49:32 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/22 19:15:31 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ char		*get_path(char *dir, char *name)
 	return (path);
 }
 
-
-int			check_stat_bis(t_arg *link, char *file)
+int			check_file(t_arg *link, char *file)
 {
 	if (!(link->buf = (t_stat*)ft_memalloc(sizeof(t_stat))))
 	{
@@ -49,6 +48,7 @@ int			check_stat_bis(t_arg *link, char *file)
 	}
 	return (0);
 }
+
 int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option)
 {
 	t_arg	*link;
@@ -60,7 +60,7 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option)
 		link->name = ft_strdup(runner->ptr->d_name);
 		link->path = get_path(runner->path, link->name);
 //		printf("\n%s", link->path);
-		if (check_stat_bis(link, link->path) == -1)
+		if (check_file(link, link->path) == -1)
 			return (-1);
 		else
 		{
@@ -84,7 +84,6 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option)
 	return(0);
 }
 
-
 void			rec(t_arg *dir_lst, t_flags *option)
 {
 	t_arg	*runner;
@@ -99,7 +98,7 @@ void			rec(t_arg *dir_lst, t_flags *option)
 				&& ft_strcmp(runner->name, "..") != 0)
 		{
 //			printf("\n%s/%s \n", runner->name, runner->path);
-
+			print_file(runner);
 			if ((runner->dir = opendir(runner->path)))
 			{
 //	ft_putendl(runner->name);

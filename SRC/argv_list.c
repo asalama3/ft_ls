@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/21 16:49:35 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/22 19:15:36 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int		ft_ls(char **argv, t_flags option)
 {
 	t_arg	*arg_lst;
 	t_arg	*link;
+	char	*rights;
+	int		len;
 
 	arg_lst = NULL;
 	while (*argv != NULL)
@@ -88,7 +90,11 @@ int		ft_ls(char **argv, t_flags option)
 	sort_flags(&option, &arg_lst);
 	error_list(&arg_lst);
 	arg_sort_file_dir(&arg_lst);
-	test_dir(&arg_lst, &option);
+	rights = get_rights(link);
+	len = nb_hardlinks(link);
+	get_file_group(link);
+	print_rights(rights, len);
+//	test_dir(&arg_lst, &option);
 	print_arg_list(arg_lst);
 	return (0);
 }
