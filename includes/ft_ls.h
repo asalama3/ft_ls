@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/22 19:15:43 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/23 18:25:32 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <grp.h>
+#include <pwd.h>
 #include <dirent.h>
 #include <time.h>
 #include <unistd.h>
@@ -30,6 +31,8 @@ typedef struct stat		t_stat;
 typedef struct dirent	t_dirent;
 
 typedef struct group	t_group;
+
+typedef struct passwd	t_passwd;
 
 typedef struct		s_flags
 {
@@ -55,8 +58,8 @@ typedef struct		s_arg
 typedef struct		s_file
 {
 	char			*rights;
-	char			*gid;
-	char			*pwd;
+	char			*gr_name;
+	char			*pw_name;
 	int				nb_link;
 	char			*file_name;
 	int				size;
@@ -95,7 +98,11 @@ void				test_dir(t_arg **old_lst, t_flags *option);
 /* -------------L_OPTION --------------- */
 char				*get_rights(t_arg *runner);
 int					nb_hardlinks(t_arg *runner);
+void				get_file_owner(t_arg *runner);
 void				get_file_group(t_arg *runner);
+void				get_file_size(t_arg *runner);
+void				get_file_time(t_arg *runner);
+void				get_file_name(t_arg *runner);
 void				print_rights(char *rights, int len);
 
 #endif

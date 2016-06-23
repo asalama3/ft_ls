@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 12:09:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/22 19:15:40 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/23 18:25:27 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,91 @@ int			nb_hardlinks(t_arg *runner)
 	int		len;
 
 	len = runner->buf->st_nlink;
+//	printf("%i\n", len);
 	return (len);
 }
-/*
+
 void		get_file_owner(t_arg *runner)
 {
+	t_passwd		*passwd;
+	t_file		*file;
+
+	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
+	passwd = getpwuid(runner->buf->st_uid);
+	printf("%s\n", passwd->pw_name);
+	if (passwd == NULL)
+		file->pw_name = ft_itoa(runner->buf->st_uid);
+	else
+		file->pw_name = passwd->pw_name;
 }
-*/
+
 void		get_file_group(t_arg *runner)
 {
 	t_group		*group;
+	t_file		*file;
 
+	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
 	group = getgrgid(runner->buf->st_gid);
-	printf("%s", group->gr_name);
+	if (group == NULL)
+		file->gr_name = ft_itoa(runner->buf->st_gid);
+	else
+		file->gr_name = group->gr_name;
+	printf("%s\n", group->gr_name);
 }
 
-void		get_file_size()
+void		get_file_size(t_arg *runner)
 {
+	t_file		*file;
+	
+	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
+	file->size = runner->buf->st_size;
+	
+	printf("%i\n", file->size);
+}
+
+void		get_file_time(t_arg *runner)
+{
+	t_file		*file;
+	char		*c_time;
+	time_t		c;
+	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
+	c_time = ft_strnew(13);
+	c = time(NULL);
+//	file->time_date = runner->buf->st_mtime;
+	c_time = ctime(&runner->buf->st_mtime);
+//	if ((runner->buf->st_mtime - c) > 15778800 || (runner->buf->st_mtime - c) < -15778800)
+	c_time = ft_strsub(c_time, 3, 7);
+	printf("%s\n", c_time);
+}
+
+void		get_file_name(t_arg *runner)
+{
+	t_file		*file;
+	
+	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
+	file->file_name = strdup(runner->name);
+	printf("%s\n", file->file_name);
+
 }
 
 void		print_rights(char *rights, int len)
