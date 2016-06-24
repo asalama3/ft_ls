@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/23 18:25:30 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/24 19:54:07 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,15 @@ int		ft_ls(char **argv, t_flags option)
 {
 	t_arg	*arg_lst;
 	t_arg	*link;
-	char	*rights;
-	int		len;
+//	char	*rights;
+//	int		len;
+	t_file	*file;
 
+	if (!(file = (t_file*)ft_memalloc(sizeof(t_file))))
+	{
+		perror("error malloc");
+		exit(EXIT_FAILURE);
+	}
 	arg_lst = NULL;
 	while (*argv != NULL)
 	{
@@ -90,15 +96,19 @@ int		ft_ls(char **argv, t_flags option)
 	sort_flags(&option, &arg_lst);
 	error_list(&arg_lst);
 	arg_sort_file_dir(&arg_lst);
-	rights = get_rights(link);
-	len = nb_hardlinks(link);
-	print_rights(rights, len);
-	get_file_owner(link);
-	get_file_group(link);
-	get_file_size(link);
-	get_file_time(link);
-	get_file_name(link);
-//	test_dir(&arg_lst, &option);
+//	rights = get_rights(link);
+//	len = nb_hardlinks(link);
+//	print_rights(rights, len);
+	get_rights(link, file);
+	nb_hardlinks(link, file);
+	get_file_owner(link, file);
+	get_file_group(link, file);
+	get_file_size(link, file);
+	get_file_time(link, file);
+	get_file_name(link, file);
+	get_link(link, file);
+	print_l_info(file);
+	test_dir(&arg_lst, &option);
 	print_arg_list(arg_lst);
 	return (0);
 }

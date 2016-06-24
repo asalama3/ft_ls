@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/23 18:25:32 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/24 19:58:22 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ typedef struct		s_file
 	char			*rights;
 	char			*gr_name;
 	char			*pw_name;
-	int				nb_link;
+	int				nb_hlink;
 	char			*file_name;
 	int				size;
-	int				time_date;
+	char			*time_date;
 }					t_file;
 
 /* -------------ERROR ---------------- */
@@ -96,13 +96,15 @@ void				arg_sort_file_dir(t_arg **old_lst);
 void				test_dir(t_arg **old_lst, t_flags *option);
 
 /* -------------L_OPTION --------------- */
-char				*get_rights(t_arg *runner);
-int					nb_hardlinks(t_arg *runner);
-void				get_file_owner(t_arg *runner);
-void				get_file_group(t_arg *runner);
-void				get_file_size(t_arg *runner);
-void				get_file_time(t_arg *runner);
-void				get_file_name(t_arg *runner);
-void				print_rights(char *rights, int len);
+void				get_rights(t_arg *runner, t_file *file);
+void				nb_hardlinks(t_arg *runner, t_file *file);
+void				get_file_owner(t_arg *runner, t_file *file);
+void				get_file_group(t_arg *runner, t_file *file);
+void				get_file_size(t_arg *runner, t_file *file);
+void				get_file_time(t_arg *runner, t_file *file);
+void				get_file_name(t_arg *runner, t_file *file);
+void				get_link(t_arg *runner, t_file *file);
+//void				print_rights(char *rights, int len);
+void				print_l_info(t_file *file);
 
 #endif
