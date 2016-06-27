@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/05/27 16:10:49 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/27 17:13:54 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,22 @@ int			main(int argc, char **argv)
 {
 	t_flags		option;
 	int			ret;
+	int			i;
 
-	if (argc >= 1)
+	if (argc >= 2)
 	{
 		if ((ret = flags(argv, &option)) == -1)
 			return (-1);
-		check_flags(option);
+//		check_flags(option);
 		if (ft_ls(argv + ret, option) == -1)
 			return (-1);
+	}
+	else
+	{
+		option.l = 0;
+		i = 0;
+		argv[i] = "./";
+		ft_ls(argv, option);
 	}
 	return (0);
 }

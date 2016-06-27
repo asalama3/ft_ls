@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/22 19:15:28 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/27 17:13:51 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_arg_list(t_arg *lst)
 	if (lst != NULL)
 	{
 		runner = lst;
-		ft_putendl("///////ARGV LIST //////////");
+//		ft_putendl("///////ARGV LIST //////////");
 		while (runner)
 		{
 			ft_putendl(runner->name);
@@ -40,4 +40,22 @@ void		print_file(t_arg *runner)
 	ft_putstr(tmp);
 	write (1, ":", 1);
 	free (tmp);
+}
+
+void		print_l_info(t_file *file)
+{
+		ft_putstr(file->rights);
+		ft_putstr(" ");
+		ft_putnbr(file->nb_hlink);
+		ft_putstr(" ");
+		ft_putstr(file->pw_name);
+		ft_putstr(" ");
+		ft_putstr(file->gr_name);
+		ft_putstr(" ");
+		ft_putnbr(file->size);
+		ft_putstr(" ");
+		ft_putstr(file->time_date);
+		ft_putstr(" ");
+		ft_putstr(file->file_name);
+		ft_putstr("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 12:09:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/24 19:54:04 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/27 17:13:59 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ char		get_file_type(t_arg *runner)
 
 void		get_rights(t_arg *runner, t_file *file)
 {
-//	char	*rights;
-
 	file->rights = ft_strnew(10);
 	file->rights[0] = get_file_type(runner);
 	file->rights[1] = (runner->buf->st_mode & S_IRUSR) ? 'r' : '-';
@@ -48,16 +46,11 @@ void		get_rights(t_arg *runner, t_file *file)
 	file->rights[7] = (runner->buf->st_mode & S_IROTH) ? 'r' : '-';
 	file->rights[8] = (runner->buf->st_mode & S_IWOTH) ? 'w' : '-';
 	file->rights[9] = (runner->buf->st_mode & S_IXOTH) ? 'x' : '-';
-//	return (file->rights);
 }
 
 void			nb_hardlinks(t_arg *runner, t_file *file)
 {
-//	int		len;
-
 	file->nb_hlink = runner->buf->st_nlink;
-//	printf("%i\n", len);
-//	return (len);
 }
 
 void		get_file_owner(t_arg *runner, t_file *file)
@@ -65,7 +58,6 @@ void		get_file_owner(t_arg *runner, t_file *file)
 	t_passwd		*passwd;
 
 	passwd = getpwuid(runner->buf->st_uid);
-	printf("%s\n", passwd->pw_name);
 	if (passwd == NULL)
 		file->pw_name = ft_itoa(runner->buf->st_uid);
 	else
@@ -81,14 +73,11 @@ void		get_file_group(t_arg *runner, t_file *file)
 		file->gr_name = ft_itoa(runner->buf->st_gid);
 	else
 		file->gr_name = group->gr_name;
-//	printf("%s\n", group->gr_name);
 }
 
 void		get_file_size(t_arg *runner, t_file *file)
 {
 	file->size = runner->buf->st_size;
-	
-//	printf("%i\n", file->size);
 }
 
 void		get_file_time(t_arg *runner, t_file *file)
@@ -109,7 +98,6 @@ void		get_file_time(t_arg *runner, t_file *file)
 	}
 	else
 		file->time_date = ft_strsub(c_time, 4, 12);
-//	printf("%s\n", file->time_date);
 }
 
 void		get_link(t_arg *runner, t_file *file)
@@ -118,49 +106,24 @@ void		get_link(t_arg *runner, t_file *file)
 	char	buf[256];
 	
 	count = readlink(runner->path, buf, 256);
-//	printf("%i\n", count);
 	if (count == -1)
 	{
 		file->file_name = ft_strdup(runner->name);
-//		perror("error malloc");
 	}
 	else
 	{
 		file->file_name = ft_strjoin(ft_strdup(runner->name), " -> ");
 		file->file_name = ft_strjoin(file->file_name, buf);
 	}
-//	printf("%s\n", file->file_name);
 }
 
-void		get_file_name(t_arg *runner, t_file *file)
+void		l_info(t_arg *runner, t_file *file)
 {
-	file->file_name = ft_strdup(runner->name);
-//	printf("%s\n", file->file_name);
-}
-/*
-void		print_rights(char *rights, int len)
-{
-
-	ft_putstr(rights);
-	ft_putstr("\n");
-	ft_putnbr(len);
-	ft_putstr("\n");
-}*/
-
-void		print_l_info(t_file *file)
-{
-	ft_putstr(file->rights);
-	ft_putstr(" ");
-	ft_putnbr(file->nb_hlink);
-	ft_putstr(" ");
-	ft_putstr(file->pw_name);
-	ft_putstr(" ");
-	ft_putstr(file->gr_name);
-	ft_putstr(" ");
-	ft_putnbr(file->size);
-	ft_putstr(" ");
-	ft_putstr(file->time_date);
-	ft_putstr(" ");
-	ft_putstr(file->file_name);
-	ft_putstr("\n");
+	get_rights(runner, file);
+	nb_hardlinks(runner, file);
+	get_file_owner(runner, file);
+	get_file_group(runner, file);
+	get_file_size(runner, file);
+	get_file_time(runner,file);
+	get_link(runner, file);
 }
