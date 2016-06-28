@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:48:20 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 13:07:29 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/28 19:33:04 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int			flags(char **argv, t_flags *option)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (i);
 }
 
 void			check_flags(t_flags option)

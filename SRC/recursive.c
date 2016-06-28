@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 13:34:16 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/28 20:43:24 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ char		*get_path(char *dir, char *name)
 		path[ft_strlen(dir)] = '/';
 	path = ft_strcat(path, name);
 */
+	char	*tmp;
 	path = ft_strjoin(dir, "/");
+	tmp = path;
 	path = ft_strjoin(path, name);
+	free (tmp);
 //	printf("name: %s \n ", name);
 //	printf("dir: %s\n  ", dir);
 //	printf("path: %s \n", path);
@@ -50,15 +53,16 @@ int			check_file(t_arg *link, char *file)
 }
 
 
-		
-		int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
+int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 {
 	t_arg	*link;
 
 	while ((runner->ptr = readdir(runner->dir)) != NULL)
 	{
-//		if (!option->a && runner->ptr->d_name[0] == '.')
-//			break ;
+		if (!option->a && (runner->ptr->d_name[0] == '.' || 
+					(ft_strcmp(".", runner->ptr->d_name) == 0) || 
+					ft_strcmp("..", runner->ptr->d_name) == 0))
+			continue ;
 		if ((link = link_malloc()) == NULL)
 			return (-1);
 		link->name = ft_strdup(runner->ptr->d_name);
@@ -88,9 +92,9 @@ int			check_file(t_arg *link, char *file)
 	printf("\n*********************\n");*/
 
 //	printf("%s  NAME:\n", runner->name);
+	print_arg_list(dir_lst);
 	if (option->cap_r)
 		rec(dir_lst, option, file);
-	print_arg_list(dir_lst);
 	return(0);
 }
 

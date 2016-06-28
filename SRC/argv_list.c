@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 13:06:53 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/28 20:43:29 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		ft_ls(char **argv, t_flags option)
 		argv++;
 	}
 	sort_flags(&option, &arg_lst);
+// condition pour error liste:
 	error_list(&arg_lst);
 	arg_sort_file_dir(&arg_lst);
 	test_dir(&arg_lst, &option);
