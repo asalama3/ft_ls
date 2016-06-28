@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/27 17:14:01 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/28 13:34:16 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ int			check_file(t_arg *link, char *file)
 	return (0);
 }
 
-int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
+
+		
+		int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 {
 	t_arg	*link;
 
 	while ((runner->ptr = readdir(runner->dir)) != NULL)
 	{
+//		if (!option->a && runner->ptr->d_name[0] == '.')
+//			break ;
 		if ((link = link_malloc()) == NULL)
 			return (-1);
 		link->name = ft_strdup(runner->ptr->d_name);
@@ -158,3 +162,4 @@ void			test_dir(t_arg **old_lst, t_flags *option)
 			runner = runner->next;
 	}
 }
+

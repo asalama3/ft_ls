@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/06/22 15:14:34 by asalama          ###   ########.fr        #
+#    Updated: 2016/06/28 10:52:24 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,10 @@ SRC_PATH = ./SRC/
 
 SRC_NAME = main.c				\
 		   error.c				\
+		   flags.c				\
 		   argv_list.c			\
 		   print.c				\
-		   sort.c				\
+		   sort_arg_list.c		\
 		   list_tools.c			\
 		   position.c			\
 		   sort_file_dir.c		\

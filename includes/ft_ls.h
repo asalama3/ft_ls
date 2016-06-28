@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/27 16:05:28 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/28 11:19:47 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ void				ft_error(char option);
 void				error_list(t_arg **old_lst);
 void				ft_stat_error(char *file);
 
+/* -------------FLAGS ---------------- */
+int					flags(char **argv, t_flags *option);
+void				check_flags(t_flags option);
 /* -----------LIST_TOOlS -------------- */
 int					list_len(t_arg **lst);
 void				position_front(t_arg *runner, t_arg *tmp);
