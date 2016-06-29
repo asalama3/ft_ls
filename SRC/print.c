@@ -6,13 +6,13 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 15:41:33 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/29 21:33:24 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		print_arg_list(t_arg *lst)
+void		print_arg_list(t_arg *lst, t_flags *option, t_file *file)
 {
 	t_arg	*runner;
 	
@@ -22,6 +22,12 @@ void		print_arg_list(t_arg *lst)
 //		ft_putendl("///////ARGV LIST //////////");
 		while (runner)
 		{
+			if (option->l)
+			{
+				l_info(runner, file);
+				print_l_info(file);
+			}
+			else
 			ft_putendl(runner->name);
 			runner = runner->next;
 		}
@@ -38,8 +44,15 @@ void		print_file(t_arg *runner)
 		exit(EXIT_FAILURE);
 //	write (1, "\n: ", 2);
 	ft_putstr(tmp);
-	write (1, ":", 1);
+	write (1, ":\n", 2);
 	free (tmp);
+}
+
+void		print_total(t_file *file)
+{
+		ft_putstr("total ");
+		ft_putnbr(file->nb_blocks);
+		ft_putstr("\n");
 }
 
 void		print_l_info(t_file *file)

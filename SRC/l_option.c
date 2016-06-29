@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 12:09:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/27 17:13:59 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/29 21:26:47 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,11 @@ void		get_link(t_arg *runner, t_file *file)
 		file->file_name = ft_strjoin(ft_strdup(runner->name), " -> ");
 		file->file_name = ft_strjoin(file->file_name, buf);
 	}
+}
+
+void		total(t_arg *runner, t_file *file)
+{
+	file->nb_blocks += runner->buf->st_blocks;
 }
 
 void		l_info(t_arg *runner, t_file *file)

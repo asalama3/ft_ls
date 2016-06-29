@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 11:19:47 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/29 23:57:01 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 typedef struct stat		t_stat;
 
+typedef struct timespec		t_timespec;
+
 typedef struct dirent	t_dirent;
 
 typedef struct group	t_group;
@@ -47,6 +49,7 @@ typedef struct		s_arg
 {
 	t_dirent		*ptr;
 	t_stat			*buf;
+//	t_timespec		*time;
 	t_group			*group;
 	DIR				*dir;
 	char			*path;
@@ -63,6 +66,7 @@ typedef struct		s_file
 	int				nb_hlink;
 	char			*file_name;
 	int				size;
+	int				nb_blocks;
 	char			*time_date;
 }					t_file;
 
@@ -81,7 +85,7 @@ void				position_back(t_arg *runner, t_arg *tmp);
 void				position_insert(t_arg *tmp);
 void				push_back(t_arg *runner, t_arg **begin_lst);
 void				init_lst(t_arg *runner);
-void				print_arg_list(t_arg *lst);
+void				print_arg_list(t_arg *lst, t_flags *option, t_file *file);
 void				print_file(t_arg *runner);
 /* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
@@ -97,6 +101,7 @@ void				arg_sort_alpha(t_arg **arg_lst);
 void				arg_sort_file_dir(t_arg **old_lst);
 
 void				test_dir(t_arg **old_lst, t_flags *option);
+void				test_file(t_arg **old_lst);
 
 /* -------------L_OPTION --------------- */
 void				get_rights(t_arg *runner, t_file *file);
@@ -107,8 +112,9 @@ void				get_file_size(t_arg *runner, t_file *file);
 void				get_file_time(t_arg *runner, t_file *file);
 void				get_file_name(t_arg *runner, t_file *file);
 void				get_link(t_arg *runner, t_file *file);
-//void				print_rights(char *rights, int len);
+void				total(t_arg *runner, t_file *file);
 void				print_l_info(t_file *file);
+void				print_total(t_file *file);
 void				l_info(t_arg *runner, t_file *file);
 
 #endif

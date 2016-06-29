@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:51:29 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 20:43:26 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/30 00:35:15 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,44 @@ void			arg_sort_time(t_arg **old_lst)
 		*old_lst = (*old_lst)->next;
 		while (runner != NULL)
 		{
-			if (runner->buf->st_mtime < tmp->buf->st_mtime)
+			if (runner->buf->st_mtimespec.tv_sec != tmp->buf->st_mtimespec.tv_sec)
 			{
-				position_front(runner, tmp);
-				if (tmp->prev == NULL)
-					new_lst = tmp;
-				else
-				if (tmp->prev != NULL)
-					position_insert(tmp);
-				break ;
+				if (runner->buf->st_mtimespec.tv_sec < tmp->buf->st_mtimespec.tv_sec)
+				{
+					position_front(runner, tmp);
+					if (tmp->prev == NULL)
+						new_lst = tmp;
+					else
+						if (tmp->prev != NULL)
+							position_insert(tmp);
+					break ;
+				}
+				else if (runner->next == NULL)
+				{
+					position_back(runner, tmp);
+					break ;
+				}
 			}
-			else if (runner->next == NULL)
+			if (runner->buf->st_mtimespec.tv_nsec != tmp->buf->st_mtimespec.tv_nsec)
 			{
-				position_back(runner, tmp);
-				break ;
+				if (runner->buf->st_mtimespec.tv_nsec < tmp->buf->st_mtimespec.tv_nsec)
+				{
+					position_front(runner, tmp);
+					if (tmp->prev == NULL)
+						new_lst = tmp;
+					else
+						if (tmp->prev != NULL)
+							position_insert(tmp);
+					break ;
+				}
+				else if (runner->next == NULL)
+				{
+					position_back(runner, tmp);
+					break ;
+				}
 			}
+			else
+				arg_sort_alpha(old_lst);
 			runner = runner->next;
 		}
 		runner = new_lst;

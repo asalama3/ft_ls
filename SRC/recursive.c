@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/28 20:43:24 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/29 21:33:51 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,8 @@
 char		*get_path(char *dir, char *name)
 {
 	char	*path;
-/*	int		length;
-	int		slash;
-
-	length = ft_strlen(dir);
-	slash = dir[length - 1] == '/';
-	length = length + slash + ft_strlen(name);
-	path = ft_strndup(dir, length + 1);
-//	if (slash)
-		path[ft_strlen(dir)] = '/';
-	path = ft_strcat(path, name);
-*/
 	char	*tmp;
+	
 	path = ft_strjoin(dir, "/");
 	tmp = path;
 	path = ft_strjoin(path, name);
@@ -52,11 +42,10 @@ int			check_file(t_arg *link, char *file)
 	return (0);
 }
 
-
 int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 {
 	t_arg	*link;
-
+	file->nb_blocks = 0;
 	while ((runner->ptr = readdir(runner->dir)) != NULL)
 	{
 		if (!option->a && (runner->ptr->d_name[0] == '.' || 
@@ -77,7 +66,7 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 	sort_flags(option, &dir_lst);
 		if (option->l)
 		{
-			l_info(link, file);
+			total(link, file);
 //			print_l_info(file);
 		}
 	}
@@ -92,7 +81,11 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 	printf("\n*********************\n");*/
 
 //	printf("%s  NAME:\n", runner->name);
-	print_arg_list(dir_lst);
+	if (S_ISDIR(runner->buf->st_mode))
+		print_file(runner);
+	if (option->l)
+		print_total(file);
+	print_arg_list(dir_lst, option, file);
 	if (option->cap_r)
 		rec(dir_lst, option, file);
 	return(0);
@@ -111,6 +104,11 @@ void			rec(t_arg *dir_lst, t_flags *option, t_file *file)
 		if (S_ISDIR(runner->buf->st_mode) && ft_strcmp(runner->name, ".") != 0 
 				&& ft_strcmp(runner->name, "..") != 0)
 		{
+			if (option->l)
+			{
+				l_info(runner, file);
+				total(runner, file);
+			}
 //			printf("\n%s/%s \n", runner->name, runner->path);
 			print_file(runner);
 			if ((runner->dir = opendir(runner->path)))
@@ -144,10 +142,10 @@ void			test_dir(t_arg **old_lst, t_flags *option)
 	}
 	while (runner != NULL)
 	{
-		if (option->l)
+		if (option->l && !S_ISDIR(runner->buf->st_mode))
 		{
 			l_info(runner, file);
-//			print_l_info(file);
+			print_l_info(file);
 		}
 		if (S_ISDIR(runner->buf->st_mode))
 		{
@@ -162,8 +160,28 @@ void			test_dir(t_arg **old_lst, t_flags *option)
 			}
 		runner = runner->next;
 		}
-		else
-			runner = runner->next;
+	else
+		runner = runner->next;
 	}
+}
+
+
+void			test_file(t_arg **old_lst)
+{
+	t_arg	*runner;
+	t_arg	*dir_lst;
+
+	runner = *old_lst;
+	dir_lst = NULL;
+	while (runner != NULL)
+	{
+		if (!S_ISDIR(runner->buf->st_mode))
+		{
+			ft_putstr(runner->name);
+			ft_putstr("\n");
+		}
+		runner = runner->next;
+	}
+	ft_putstr("\n");
 }
 
