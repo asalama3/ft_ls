@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:51:29 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 00:35:15 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/30 13:52:27 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,27 @@ void			arg_sort_reverse(t_arg **old_lst)
 		runner = new_lst;
 	}	
 	*old_lst = new_lst;
+}
+
+void			free_old_lst(t_arg **old_lst)
+{
+	t_arg	*runner;
+	t_arg	*tmp;
+
+	runner = *old_lst;
+	if (!runner)
+		return ;
+	if (!runner->next)
+	{
+		free(runner);
+		return ;
+	}
+	while (runner != NULL)
+	{
+		tmp = runner;
+		runner = runner->next;
+		free(tmp);
+	}
 }
 
 void			arg_sort_time(t_arg **old_lst)
@@ -68,14 +89,31 @@ void			arg_sort_time(t_arg **old_lst)
 					break ;
 				}
 				else if (runner->next == NULL)
-				{
-					position_back(runner, tmp);
-					break ;
-				}
+					{
+						position_back(runner, tmp);
+						break ;
+					}
 			}
-			if (runner->buf->st_mtimespec.tv_nsec != tmp->buf->st_mtimespec.tv_nsec)
+			else if (runner->buf->st_mtimespec.tv_nsec != tmp->buf->st_mtimespec.tv_nsec)
 			{
 				if (runner->buf->st_mtimespec.tv_nsec < tmp->buf->st_mtimespec.tv_nsec)
+				{
+					position_front(runner, tmp);
+					if (tmp->prev == NULL)
+						new_lst = tmp;
+					else
+						if (tmp->prev != NULL)
+							position_insert(tmp);
+					break ;
+				}
+				else if (runner->next == NULL)
+					{
+						position_back(runner, tmp);
+						break ;
+					}
+			}
+			else
+				if (ft_strcmp(runner->name, tmp->name) > 0)
 				{
 					position_front(runner, tmp);
 					if (tmp->prev == NULL)
@@ -90,9 +128,6 @@ void			arg_sort_time(t_arg **old_lst)
 					position_back(runner, tmp);
 					break ;
 				}
-			}
-			else
-				arg_sort_alpha(old_lst);
 			runner = runner->next;
 		}
 		runner = new_lst;

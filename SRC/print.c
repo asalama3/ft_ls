@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/29 21:33:24 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/30 20:20:29 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void		print_arg_list(t_arg *lst, t_flags *option, t_file *file)
 	if (lst != NULL)
 	{
 		runner = lst;
-//		ft_putendl("///////ARGV LIST //////////");
-		while (runner)
+		while (runner != NULL)
 		{
 			if (option->l)
 			{
@@ -31,18 +30,21 @@ void		print_arg_list(t_arg *lst, t_flags *option, t_file *file)
 			ft_putendl(runner->name);
 			runner = runner->next;
 		}
-		write(1, "\n", 1);
+//		if (list_en(&arg_lst) > 1 && S_ISDIR(runner->buf->st_mode))
+//			ft_putstr("\n");
+//		write(1, "\n", 1);
 	}
 }
+
+//void		print_empty_line(t_arg *runner, 
 
 void		print_file(t_arg *runner)
 {
 	char	*tmp;
 
-//	ft_putendl(runner->path);
 	if (!(tmp = ft_strdup(runner->path)))
 		exit(EXIT_FAILURE);
-//	write (1, "\n: ", 2);
+	ft_putstr("\n");
 	ft_putstr(tmp);
 	write (1, ":\n", 2);
 	free (tmp);

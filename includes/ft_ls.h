@@ -6,13 +6,15 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/29 23:57:01 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/30 18:46:42 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
+#include <sys/xattr.h>
+#include <sys/acl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <grp.h>
@@ -49,7 +51,6 @@ typedef struct		s_arg
 {
 	t_dirent		*ptr;
 	t_stat			*buf;
-//	t_timespec		*time;
 	t_group			*group;
 	DIR				*dir;
 	char			*path;

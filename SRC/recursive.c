@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/29 21:33:51 by asalama          ###   ########.fr       */
+/*   Updated: 2016/06/30 19:58:27 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ char		*get_path(char *dir, char *name)
 	tmp = path;
 	path = ft_strjoin(path, name);
 	free (tmp);
-//	printf("name: %s \n ", name);
-//	printf("dir: %s\n  ", dir);
-//	printf("path: %s \n", path);
 	return (path);
 }
 
@@ -46,6 +43,16 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 {
 	t_arg	*link;
 	file->nb_blocks = 0;
+//	char	buf[4096];
+//	int		count;
+
+//	count = readlink(runner->path, buf, 4096);
+//		printf("%s\n", buf);
+//	if (count != -1)
+//	{
+//		printf("%s", buf);
+//		runner->ptr->d_name = buf;
+//		}
 	while ((runner->ptr = readdir(runner->dir)) != NULL)
 	{
 		if (!option->a && (runner->ptr->d_name[0] == '.' || 
@@ -56,33 +63,18 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 			return (-1);
 		link->name = ft_strdup(runner->ptr->d_name);
 		link->path = get_path(runner->path, link->name);
-//		printf("\n%s", link->path);
 		if (check_file(link, link->path) == -1)
 			return (-1);
 		else
 		{
 			create_link_arg(link, &dir_lst);
 		}
-	sort_flags(option, &dir_lst);
+		sort_flags(option, &dir_lst);
 		if (option->l)
 		{
 			total(link, file);
-//			print_l_info(file);
 		}
 	}
-/*	t_arg *tmp;
-	tmp = dir_lst;
-	while (tmp)
-	{
-		printf("\n%s", tmp->name);
-//		print_l_info(tmp, file);
-		tmp = tmp->next;
-	}
-	printf("\n*********************\n");*/
-
-//	printf("%s  NAME:\n", runner->name);
-	if (S_ISDIR(runner->buf->st_mode))
-		print_file(runner);
 	if (option->l)
 		print_total(file);
 	print_arg_list(dir_lst, option, file);
@@ -98,7 +90,6 @@ void			rec(t_arg *dir_lst, t_flags *option, t_file *file)
 
 	ptr = NULL;
 	runner = dir_lst;
-//	ft_putendl(runner->path);
 	while (runner != NULL)
 	{
 		if (S_ISDIR(runner->buf->st_mode) && ft_strcmp(runner->name, ".") != 0 
@@ -109,11 +100,9 @@ void			rec(t_arg *dir_lst, t_flags *option, t_file *file)
 				l_info(runner, file);
 				total(runner, file);
 			}
-//			printf("\n%s/%s \n", runner->name, runner->path);
 			print_file(runner);
 			if ((runner->dir = opendir(runner->path)))
 			{
-//	ft_putendl(runner->name);
 				make_dir(ptr, runner, option, file);
 				if (closedir(runner->dir) == -1)
 				{
@@ -124,7 +113,6 @@ void			rec(t_arg *dir_lst, t_flags *option, t_file *file)
 		}
 		runner = runner->next;
 	}
-//	print_arg_list(*dir_lst);
 }
 
 void			test_dir(t_arg **old_lst, t_flags *option)
@@ -147,6 +135,8 @@ void			test_dir(t_arg **old_lst, t_flags *option)
 			l_info(runner, file);
 			print_l_info(file);
 		}
+	if (list_len(old_lst) > 1 && S_ISDIR(runner->buf->st_mode))
+		print_file(runner);
 		if (S_ISDIR(runner->buf->st_mode))
 		{
 			if ((runner->dir = opendir(runner->path)))
@@ -165,7 +155,6 @@ void			test_dir(t_arg **old_lst, t_flags *option)
 	}
 }
 
-
 void			test_file(t_arg **old_lst)
 {
 	t_arg	*runner;
@@ -180,8 +169,9 @@ void			test_file(t_arg **old_lst)
 			ft_putstr(runner->name);
 			ft_putstr("\n");
 		}
+//		else if (list_len(old_lst) > 1 && S_ISDIR(runner->buf->st_mode))
+//			ft_putstr("\n");
 		runner = runner->next;
 	}
-	ft_putstr("\n");
 }
 
