@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 20:20:31 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/01 18:43:04 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ void			create_link_arg(t_arg *link, t_arg **arg_lst)
 		}
 }
 
-int			check_stat(t_arg *link, char *file)
+int			check_stat(t_arg *link, char *file, t_flags *option)
 {
+	t_stat		*tmp;
+
 	if (!(link->buf = (t_stat*)ft_memalloc(sizeof(t_stat))))
 	{
 		perror("error malloc");
@@ -44,6 +46,19 @@ int			check_stat(t_arg *link, char *file)
 	{
 		free(link->buf);
 		link->buf = NULL;
+	}
+	if (!option->l && S_ISLNK(link->buf->st_mode) == 1)
+	{
+//		printf("toto");
+		if (!(tmp = (t_stat*)ft_memalloc(sizeof(t_stat))))
+		{
+			perror("eroor");
+			exit(EXIT_FAILURE);
+		}
+		if (stat(file, tmp) == -1)
+			free(tmp);
+		link->buf->st_mode = tmp->st_mode;
+		free(tmp);
 	}
 	if ((!(link->path = ft_strdup(file))) || (!(link->name = ft_strdup(file))))
 	{
@@ -79,7 +94,7 @@ int		ft_ls(char **argv, t_flags option)
 	{
 		if ((link = link_malloc()) == NULL)
 			return (-1);
-		if (check_stat(link, *argv) == -1)
+		if (check_stat(link, *argv, &option) == -1)
 			return (-1);
 		else
 			create_link_arg(link, &arg_lst);

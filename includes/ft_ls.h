@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 18:46:42 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/01 17:48:41 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_file
 	char			*rights;
 	char			*gr_name;
 	char			*pw_name;
+	char			*buf;
 	int				nb_hlink;
 	char			*file_name;
 	int				size;
@@ -79,6 +80,7 @@ void				ft_stat_error(char *file);
 /* -------------FLAGS ---------------- */
 int					flags(char **argv, t_flags *option);
 void				check_flags(t_flags option);
+
 /* -----------LIST_TOOlS -------------- */
 int					list_len(t_arg **lst);
 void				position_front(t_arg *runner, t_arg *tmp);
@@ -88,12 +90,12 @@ void				push_back(t_arg *runner, t_arg **begin_lst);
 void				init_lst(t_arg *runner);
 void				print_arg_list(t_arg *lst, t_flags *option, t_file *file);
 void				print_file(t_arg *runner);
+char				*get_path(char *dir, char *name);
 /* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
-int					check_stat(t_arg *link, char *file);
+int					check_stat(t_arg *link, char *file, t_flags *option);
 t_arg				*link_malloc();
 void				create_link_arg(t_arg *link, t_arg **arg_lst);
-//void				make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option);
 void				rec(t_arg *dir_lst, t_flags *option, t_file *file);
 
 /* -------------LIST_SORT --------------- */
@@ -101,6 +103,7 @@ void				sort_flags(t_flags *option, t_arg **arg_lst);
 void				arg_sort_alpha(t_arg **arg_lst);
 void				arg_sort_file_dir(t_arg **old_lst);
 
+/* -------------TEST_DIR_FILE --------------- */
 void				test_dir(t_arg **old_lst, t_flags *option);
 void				test_file(t_arg **old_lst);
 

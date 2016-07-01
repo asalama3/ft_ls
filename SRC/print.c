@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 20:20:29 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/01 18:14:11 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,8 @@ void		print_arg_list(t_arg *lst, t_flags *option, t_file *file)
 			ft_putendl(runner->name);
 			runner = runner->next;
 		}
-//		if (list_en(&arg_lst) > 1 && S_ISDIR(runner->buf->st_mode))
-//			ft_putstr("\n");
-//		write(1, "\n", 1);
 	}
 }
-
-//void		print_empty_line(t_arg *runner, 
 
 void		print_file(t_arg *runner)
 {
