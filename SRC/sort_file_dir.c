@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/24 10:50:38 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/06 20:41:23 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 15:20:04 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ void			join_file_dir(t_arg **old_lst, t_arg *f_list)
 	}
 }
 
-void			arg_sort_file_dir(t_arg **old_lst)
+/*void			push_front_files(t_arg **old_lst)
 {
-	t_arg	*f_list;
-	t_arg	*runner;
-	t_arg	*tmp;
+	t_arg 	*runner;
+	t_arg 	*f_list;
 
 	runner = *old_lst;
 	f_list = NULL;
@@ -42,7 +41,24 @@ void			arg_sort_file_dir(t_arg **old_lst)
 		push_back(runner, &f_list);
 		runner = *old_lst;
 	}
-	tmp = runner; 
+}*/
+
+void			arg_sort_file_dir(t_arg **old_lst)
+{
+	t_arg	*f_list;
+	t_arg	*runner;
+	t_arg	*tmp;
+
+	runner = *old_lst;
+	f_list = NULL;
+//	push_front_files(old_lst);
+	while (runner != NULL && !S_ISDIR(runner->buf->st_mode))
+	{
+		*old_lst = (*old_lst)->next;
+		push_back(runner, &f_list);
+		runner = *old_lst;
+	}
+	tmp = runner;
 	while (tmp != NULL)
 	{
 		if (!S_ISDIR(tmp->buf->st_mode))

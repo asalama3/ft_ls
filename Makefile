@@ -19,17 +19,20 @@ CFLAGS = -Wall -Werror -Wextra -g3
 SRC_PATH = ./SRC/
 
 SRC_NAME = main.c				\
-		   error.c				\
+		   print_error.c		\
 		   flags.c				\
 		   argv_list.c			\
 		   print.c				\
 		   sort_arg_list.c		\
 		   list_tools.c			\
 		   position.c			\
+		   check_files.c		\
 		   sort_file_dir.c		\
 		   error_list.c			\
 		   recursive.c			\
 		   l_option.c			\
+		   l_option_continue.c	\
+		   acl.c				\
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 

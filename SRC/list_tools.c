@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:41:01 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 14:26:01 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 11:28:13 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		list_len(t_arg **lst)
 		{
 			n++;
 			runner = runner->next;
-//			printf("lst count: %d\n", n);
 		}
 		return (n);
 	}

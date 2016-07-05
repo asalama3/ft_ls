@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/01 18:43:04 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 14:03:59 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,41 +33,36 @@ void			create_link_arg(t_arg *link, t_arg **arg_lst)
 		}
 }
 
+void		check_stat_link(char *file, t_arg *link)
+{
+	t_stat	*tmp;
+
+		if (!(tmp = (t_stat*)ft_memalloc(sizeof(t_stat))))
+			error_exit("Error malloc", EXIT_FAILURE);
+		if (stat(file, tmp) == -1)
+			free(tmp);
+		link->buf->st_mode = tmp->st_mode;
+		free(tmp);
+}
+
 int			check_stat(t_arg *link, char *file, t_flags *option)
 {
-	t_stat		*tmp;
-
 	if (!(link->buf = (t_stat*)ft_memalloc(sizeof(t_stat))))
-	{
-		perror("error malloc");
-		exit(EXIT_FAILURE);
-	}
+		error_exit("Error malloc", EXIT_FAILURE);
 	if ((lstat(file, link->buf)) == -1)
 	{
 		free(link->buf);
 		link->buf = NULL;
 	}
-	if (!option->l && S_ISLNK(link->buf->st_mode) == 1)
-	{
-//		printf("toto");
-		if (!(tmp = (t_stat*)ft_memalloc(sizeof(t_stat))))
-		{
-			perror("eroor");
-			exit(EXIT_FAILURE);
-		}
-		if (stat(file, tmp) == -1)
-			free(tmp);
-		link->buf->st_mode = tmp->st_mode;
-		free(tmp);
-	}
+	else if (!option->l && S_ISLNK(link->buf->st_mode) == 1)
+		check_stat_link(file, link);
 	if ((!(link->path = ft_strdup(file))) || (!(link->name = ft_strdup(file))))
 	{
 		if (link->path)
 			free(link->path);
 		free(link->buf);
 		free(link);
-		perror("error malloc");
-		exit(EXIT_FAILURE);
+		error_exit("Error malloc", EXIT_FAILURE);
 	}
 	return (0);
 }
@@ -88,6 +83,7 @@ int		ft_ls(char **argv, t_flags option)
 {
 	t_arg	*arg_lst;
 	t_arg	*link;
+	t_arg		*error;
 
 	arg_lst = NULL;
 	while (*argv != NULL)
@@ -101,10 +97,10 @@ int		ft_ls(char **argv, t_flags option)
 		argv++;
 	}
 	sort_flags(&option, &arg_lst);
-	error_list(&arg_lst);
+	error = error_list(&arg_lst);
 	arg_sort_file_dir(&arg_lst);
 	if (!option.l)
 		test_file(&arg_lst);
-	test_dir(&arg_lst, &option);
+	test_dir(&arg_lst, &option, error);
 	return (0);
 }

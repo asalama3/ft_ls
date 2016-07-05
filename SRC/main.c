@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:53:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 18:58:32 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 14:14:14 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int			main(int argc, char **argv)
 
 	if ((ret = flags(argv, &option)) == -1)
 		return (-1);
-//	check_flags(option);
 	if (argc - ret > 0)
 	{
 		if (ft_ls(argv + ret, option) == -1)

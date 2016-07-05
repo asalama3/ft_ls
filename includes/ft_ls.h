@@ -28,6 +28,12 @@
 
 #include <stdio.h>
 
+#define MINORBITS        20
+#define MINORMASK        ((1U << MINORBITS) - 1)
+
+#define MAJOR(dev)        ((unsigned int) ((dev) >> MINORBITS))
+#define MINOR(dev)        ((unsigned int) ((dev) & MINORMASK))
+
 typedef struct stat		t_stat;
 
 typedef struct timespec		t_timespec;
@@ -68,14 +74,17 @@ typedef struct		s_file
 	int				nb_hlink;
 	char			*file_name;
 	int				size;
+	unsigned int	maj;
+	unsigned int	min;
 	int				nb_blocks;
 	char			*time_date;
 }					t_file;
 
 /* -------------ERROR ---------------- */
 void				ft_error(char option);
-void				error_list(t_arg **old_lst);
+t_arg				*error_list(t_arg **old_lst);
 void				ft_stat_error(char *file);
+void				error_exit(char *str, int error);
 
 /* -------------FLAGS ---------------- */
 int					flags(char **argv, t_flags *option);
@@ -89,14 +98,16 @@ void				position_insert(t_arg *tmp);
 void				push_back(t_arg *runner, t_arg **begin_lst);
 void				init_lst(t_arg *runner);
 void				print_arg_list(t_arg *lst, t_flags *option, t_file *file);
-void				print_file(t_arg *runner);
+void				print_file(t_arg *runne, t_flags *optionr);
 char				*get_path(char *dir, char *name);
+
 /* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
 int					check_stat(t_arg *link, char *file, t_flags *option);
 t_arg				*link_malloc();
 void				create_link_arg(t_arg *link, t_arg **arg_lst);
 void				rec(t_arg *dir_lst, t_flags *option, t_file *file);
+int					make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file);
 
 /* -------------LIST_SORT --------------- */
 void				sort_flags(t_flags *option, t_arg **arg_lst);
@@ -104,7 +115,7 @@ void				arg_sort_alpha(t_arg **arg_lst);
 void				arg_sort_file_dir(t_arg **old_lst);
 
 /* -------------TEST_DIR_FILE --------------- */
-void				test_dir(t_arg **old_lst, t_flags *option);
+void				test_dir(t_arg **old_lst, t_flags *option, t_arg *error_lst);
 void				test_file(t_arg **old_lst);
 
 /* -------------L_OPTION --------------- */
@@ -112,6 +123,7 @@ void				get_rights(t_arg *runner, t_file *file);
 void				nb_hardlinks(t_arg *runner, t_file *file);
 void				get_file_owner(t_arg *runner, t_file *file);
 void				get_file_group(t_arg *runner, t_file *file);
+void				get_sticky_bits(t_file *file);
 void				get_file_size(t_arg *runner, t_file *file);
 void				get_file_time(t_arg *runner, t_file *file);
 void				get_file_name(t_arg *runner, t_file *file);
@@ -120,5 +132,9 @@ void				total(t_arg *runner, t_file *file);
 void				print_l_info(t_file *file);
 void				print_total(t_file *file);
 void				l_info(t_arg *runner, t_file *file);
+
+/* -------------ACL --------------- */
+void				get_acl(char *filename);
+
 
 #endif

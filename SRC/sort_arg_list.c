@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:51:29 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/30 13:52:27 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 12:48:48 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ void			arg_sort_reverse(t_arg **old_lst)
 
 	while (*old_lst != NULL)
 	{
-//		printf("%s runner\n", runner->name);
 		tmp = *old_lst;
 		*old_lst = (*old_lst)->next;
 		position_front(runner, tmp);
-//		printf("%s tmp\n", tmp->name);
 		if (tmp->prev == NULL)
 			new_lst = tmp;
 		runner = new_lst;

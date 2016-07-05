@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 17:43:30 by asalama           #+#    #+#             */
-/*   Updated: 2016/06/29 17:13:56 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/03 23:18:13 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_error_list(t_arg **error_lst, t_arg *runner)
 	}
 }
 
-void	error_list(t_arg **old_lst)
+t_arg		*error_list(t_arg **old_lst)
 {
 	t_arg	*runner;
 	t_arg	*error_lst;
@@ -55,6 +55,6 @@ void	error_list(t_arg **old_lst)
 		else
 			tmp = tmp->next;
 	}
-//	printf("%s \n", runner->name);
 	print_error_list(&error_lst, runner);
+	return (error_lst);
 }
