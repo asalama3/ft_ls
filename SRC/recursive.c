@@ -6,23 +6,11 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 12:35:41 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 18:17:57 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-char		*get_path(char *dir, char *name)
-{
-	char	*path;
-	char	*tmp;
-	
-	path = ft_strjoin(dir, "/");
-	tmp = path;
-	path = ft_strjoin(path, name);
-	free (tmp);
-	return (path);
-}
 
 int			check_file(t_arg *link, char *file, t_flags *option)
 {
@@ -66,7 +54,6 @@ void		options_and_print(t_flags *option, t_file *file, t_arg *dir_lst)
 int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 {
 	t_arg	*link;
-	file->nb_blocks = 0;
 	
 	while ((runner->ptr = readdir(runner->dir)) != NULL)
 	{
@@ -90,6 +77,12 @@ int			make_dir(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 	return(0);
 }
 
+void			info_and_total_l(t_arg *runner, t_file *file)
+{
+	l_info(runner, file);
+	total(runner, file);
+}
+
 void			rec(t_arg *dir_lst, t_flags *option, t_file *file)
 {
 	t_arg	*runner;
@@ -103,10 +96,7 @@ void			rec(t_arg *dir_lst, t_flags *option, t_file *file)
 				&& ft_strcmp(runner->name, "..") != 0)
 		{
 			if (option->l)
-			{
-				l_info(runner, file);
-				total(runner, file);
-			}
+				info_and_total_l(runner, file);
 			print_file(runner, option);
 			if ((runner->dir = opendir(runner->path)))
 				make_dir(ptr, runner, option, file);

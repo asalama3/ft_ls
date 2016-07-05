@@ -103,6 +103,7 @@ char				*get_path(char *dir, char *name);
 
 /* ---------------LS ------------------- */
 int					ft_ls(char **argv, t_flags option);
+char				*get_path(char *dir, char *name);
 int					check_stat(t_arg *link, char *file, t_flags *option);
 t_arg				*link_malloc();
 void				create_link_arg(t_arg *link, t_arg **arg_lst);

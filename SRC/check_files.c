@@ -6,13 +6,13 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 15:27:09 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/05 18:10:11 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		option_l(t_arg *runner, t_file *file)
+void		info_and_print_l(t_arg *runner, t_file *file)
 {
 	l_info(runner, file);
 	print_l_info(file);
@@ -40,7 +40,7 @@ void			test_dir(t_arg **old_lst, t_flags *option, t_arg *error_lst)
 	{
 		if (option->l && !S_ISDIR(runner->buf->st_mode))
 		{
-			option_l(runner, file);
+			info_and_print_l(runner, file);
 //			l_info(runner, file);
 //			print_l_info(file);
 		}
