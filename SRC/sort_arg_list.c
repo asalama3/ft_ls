@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:51:29 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/06 16:35:40 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/06 22:20:38 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			free_old_lst(t_arg **old_lst)
 		free(tmp);
 	}
 }
-int				fanny(t_arg **runner, t_arg **tmp, t_arg **new_lst)
+int				t_pos(t_arg **runner, t_arg **tmp, t_arg **new_lst)
 {
 	position_front(*runner, *tmp);
 	if ((*tmp)->prev == NULL)
@@ -68,8 +68,8 @@ int				fanny(t_arg **runner, t_arg **tmp, t_arg **new_lst)
 }
 
 
-void				rtfm(t_arg *runner, t_arg *tmp, t_arg **new_lst)
-{		
+void			check_time(t_arg *runner, t_arg *tmp, t_arg **new_lst)
+{
 //	tmp = *old_lst;
 //	*old_lst = (*old_lst)->next;
 	while (runner != NULL)
@@ -77,20 +77,20 @@ void				rtfm(t_arg *runner, t_arg *tmp, t_arg **new_lst)
 //		printf("%p\n", tmp->buf);
 		if (runner->buf && tmp->buf && runner->TIME_S != tmp->TIME_S)
 		{
-			if (runner->TIME_S < tmp->TIME_S && fanny(&runner, &tmp, new_lst))
+			if (runner->TIME_S < tmp->TIME_S && t_pos(&runner, &tmp, new_lst))
 				break ;
 			else if (runner->next == NULL && position_back(runner, tmp))
 				break ;
 		}
 		else if (runner->buf && tmp->buf && runner->TIME_NS != tmp->TIME_NS)
 		{
-			if (runner->TIME_NS < tmp->TIME_NS && fanny(&runner, &tmp, new_lst))
+			if (runner->TIME_NS < tmp->TIME_NS && t_pos(&runner, &tmp, new_lst))
 				break ;
 			else if (runner->next == NULL && position_back(runner, tmp))
 				break ;
 		}
 		else
-			if (ft_strcmp(runner->name, tmp->name) > 0 && fanny(&runner, &tmp, new_lst))
+			if (ft_strcmp(runner->name, tmp->name) > 0 && t_pos(&runner, &tmp, new_lst))
 				break ;
 			else if (runner->next == NULL && position_back(runner, tmp))
 				break ;
@@ -113,7 +113,7 @@ void			arg_sort_time(t_arg **old_lst)
 	{
 		tmp = *old_lst;
 		*old_lst = (*old_lst)->next;
-		rtfm(runner, tmp, &new_lst);
+		check_time(runner, tmp, &new_lst);
 /*		while (runner != NULL)
 		{
 			if (tmp->buf && runner->TIME_S != tmp->TIME_S)
