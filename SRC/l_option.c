@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 12:09:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 15:40:53 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/06 12:51:51 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void		get_rights(t_arg *runner, t_file *file)
 	file->rights[9] = (runner->buf->st_mode & S_IXOTH) ? 'x' : '-';
 }
 
-void			nb_hardlinks(t_arg *runner, t_file *file)
+void		nb_hardlinks(t_arg *runner, t_file *file)
 {
 	file->nb_hlink = runner->buf->st_nlink;
 }
 
 void		get_file_owner(t_arg *runner, t_file *file)
 {
-	t_passwd		*passwd;
+	t_passwd	*passwd;
 
 	passwd = getpwuid(runner->buf->st_uid);
 	if (passwd == NULL)
@@ -67,7 +67,7 @@ void		get_file_owner(t_arg *runner, t_file *file)
 void		get_file_group(t_arg *runner, t_file *file)
 {
 	t_group		*group;
-	
+
 	group = getgrgid(runner->buf->st_gid);
 	if (group == NULL)
 		file->gr_name = ft_itoa(runner->buf->st_gid);

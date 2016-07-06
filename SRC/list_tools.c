@@ -6,25 +6,25 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:41:01 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 22:29:35 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/06 13:01:22 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char        *get_path(char *dir, char *name)
+char		*get_path(char *dir, char *name)
 {
-	char    *path;
-	char    *tmp;
-	
+	char	*path;
+	char	*tmp;
+
 	path = ft_strjoin(dir, "/");
 	tmp = path;
 	path = ft_strjoin(path, name);
-	free (tmp);
+	free(tmp);
 	return (path);
 }
 
-int		list_len(t_arg **lst)
+int			list_len(t_arg **lst)
 {
 	t_arg	*runner;
 	int		n;
@@ -43,7 +43,7 @@ int		list_len(t_arg **lst)
 	return (0);
 }
 
-void	init_lst(t_arg *runner)
+void		init_lst(t_arg *runner)
 {
 	if (runner->prev != NULL)
 		runner->prev->next = runner->next;
@@ -53,7 +53,7 @@ void	init_lst(t_arg *runner)
 	runner->prev = NULL;
 }
 
-void	push_back(t_arg *runner, t_arg **begin_lst)
+void		push_back(t_arg *runner, t_arg **begin_lst)
 {
 	t_arg	*link;
 

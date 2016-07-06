@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/30 15:37:25 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 11:26:15 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/06 16:44:03 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ void				get_acl(char *filename)
 {
 	ssize_t			xattr;
 	char			str[10];
-	acl_t 			acl;
-    acl_entry_t 	dummy;
+	acl_t			acl;
+	acl_entry_t		dummy;
 
 	acl = NULL;
 	acl = acl_get_link_np(filename, ACL_TYPE_EXTENDED);
-	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1) 
+	if (acl && acl_get_entry(acl, ACL_FIRST_ENTRY, &dummy) == -1)
 	{
 		acl_free(acl);
 		acl = NULL;
 	}
-    xattr = listxattr(filename, NULL, 0, XATTR_NOFOLLOW);
-//	printf("%zi\n", xattr);
+	xattr = listxattr(filename, NULL, 0, XATTR_NOFOLLOW);
+	printf("%zi\n", xattr);
 	// wrong xattr pour /tmp -1)
-	if (xattr < 0)
+	if (xattr > 0)
 		xattr = 0;
 	str[1] = '\0';
 	if (xattr > 0)
@@ -43,7 +43,7 @@ void				get_acl(char *filename)
 }
 
 // when to call sticky bits?
-void		get_sticky_bits(t_file *file)
+void				get_sticky_bits(t_file *file)
 {
 	if (S_ISUID)
 	{

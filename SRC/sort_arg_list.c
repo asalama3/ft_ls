@@ -6,11 +6,13 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:51:29 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 12:48:48 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/06 16:35:40 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#define TIME_S buf->st_mtimespec.tv_sec
+#define TIME_NS buf->st_mtimespec.tv_nsec
 
 void			arg_sort_reverse(t_arg **old_lst)
 {
@@ -22,7 +24,6 @@ void			arg_sort_reverse(t_arg **old_lst)
 	*old_lst = (*old_lst)->next;
 	new_lst = runner;
 	init_lst(runner);
-
 	while (*old_lst != NULL)
 	{
 		tmp = *old_lst;
@@ -31,7 +32,7 @@ void			arg_sort_reverse(t_arg **old_lst)
 		if (tmp->prev == NULL)
 			new_lst = tmp;
 		runner = new_lst;
-	}	
+	}
 	*old_lst = new_lst;
 }
 
@@ -55,6 +56,47 @@ void			free_old_lst(t_arg **old_lst)
 		free(tmp);
 	}
 }
+int				fanny(t_arg **runner, t_arg **tmp, t_arg **new_lst)
+{
+	position_front(*runner, *tmp);
+	if ((*tmp)->prev == NULL)
+		*new_lst = *tmp;
+	else
+		if ((*tmp)->prev != NULL)
+			position_insert(*tmp);
+	return (1);
+}
+
+
+void				rtfm(t_arg *runner, t_arg *tmp, t_arg **new_lst)
+{		
+//	tmp = *old_lst;
+//	*old_lst = (*old_lst)->next;
+	while (runner != NULL)
+	{
+//		printf("%p\n", tmp->buf);
+		if (runner->buf && tmp->buf && runner->TIME_S != tmp->TIME_S)
+		{
+			if (runner->TIME_S < tmp->TIME_S && fanny(&runner, &tmp, new_lst))
+				break ;
+			else if (runner->next == NULL && position_back(runner, tmp))
+				break ;
+		}
+		else if (runner->buf && tmp->buf && runner->TIME_NS != tmp->TIME_NS)
+		{
+			if (runner->TIME_NS < tmp->TIME_NS && fanny(&runner, &tmp, new_lst))
+				break ;
+			else if (runner->next == NULL && position_back(runner, tmp))
+				break ;
+		}
+		else
+			if (ft_strcmp(runner->name, tmp->name) > 0 && fanny(&runner, &tmp, new_lst))
+				break ;
+			else if (runner->next == NULL && position_back(runner, tmp))
+				break ;
+		runner = runner->next;
+		}
+}
 
 void			arg_sort_time(t_arg **old_lst)
 {
@@ -67,67 +109,34 @@ void			arg_sort_time(t_arg **old_lst)
 	new_lst = runner;
 	runner->next = NULL;
 	runner->prev = NULL;
-	
 	while (*old_lst != NULL)
 	{
 		tmp = *old_lst;
 		*old_lst = (*old_lst)->next;
-		while (runner != NULL)
+		rtfm(runner, tmp, &new_lst);
+/*		while (runner != NULL)
 		{
-			if (runner->buf->st_mtimespec.tv_sec != tmp->buf->st_mtimespec.tv_sec)
+			if (tmp->buf && runner->TIME_S != tmp->TIME_S)
 			{
-				if (runner->buf->st_mtimespec.tv_sec < tmp->buf->st_mtimespec.tv_sec)
-				{
-					position_front(runner, tmp);
-					if (tmp->prev == NULL)
-						new_lst = tmp;
-					else
-						if (tmp->prev != NULL)
-							position_insert(tmp);
+				if (runner->TIME_S < tmp->TIME_S && fanny(&runner, &tmp, &new_lst))
 					break ;
-				}
-				else if (runner->next == NULL)
-					{
-						position_back(runner, tmp);
-						break ;
-					}
+				else if (runner->next == NULL && position_back(runner, tmp))
+					break ;
 			}
-			else if (runner->buf->st_mtimespec.tv_nsec != tmp->buf->st_mtimespec.tv_nsec)
+			else if (tmp->buf && runner->TIME_NS != tmp->TIME_NS)
 			{
-				if (runner->buf->st_mtimespec.tv_nsec < tmp->buf->st_mtimespec.tv_nsec)
-				{
-					position_front(runner, tmp);
-					if (tmp->prev == NULL)
-						new_lst = tmp;
-					else
-						if (tmp->prev != NULL)
-							position_insert(tmp);
+				if (runner->TIME_NS < tmp->TIME_NS && fanny(&runner, &tmp, &new_lst))
 					break ;
-				}
-				else if (runner->next == NULL)
-					{
-						position_back(runner, tmp);
-						break ;
-					}
+				else if (runner->next == NULL && position_back(runner, tmp))
+					break ;
 			}
 			else
-				if (ft_strcmp(runner->name, tmp->name) > 0)
-				{
-					position_front(runner, tmp);
-					if (tmp->prev == NULL)
-						new_lst = tmp;
-					else
-						if (tmp->prev != NULL)
-							position_insert(tmp);
+				if (ft_strcmp(runner->name, tmp->name) > 0 && fanny(&runner, &tmp, &new_lst))
 					break ;
-				}
-				else if (runner->next == NULL)
-				{
-					position_back(runner, tmp);
+				else if (runner->next == NULL && position_back(runner, tmp))
 					break ;
-				}
 			runner = runner->next;
-		}
+		}*/
 		runner = new_lst;
 	}
 	*old_lst = new_lst;
@@ -144,7 +153,6 @@ void			arg_sort_alpha(t_arg **old_lst)
 	new_lst = runner;
 	runner->next = NULL;
 	runner->prev = NULL;
-	
 	while (*old_lst != NULL)
 	{
 		tmp = *old_lst;
@@ -157,8 +165,8 @@ void			arg_sort_alpha(t_arg **old_lst)
 				if (tmp->prev == NULL)
 					new_lst = tmp;
 				else
-				if (tmp->prev != NULL)
-					position_insert(tmp);
+					if (tmp->prev != NULL)
+						position_insert(tmp);
 				break ;
 			}
 			else if (runner->next == NULL)

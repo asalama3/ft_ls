@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 12:38:06 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 12:14:40 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/06 15:07:09 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ void		ft_error(char option)
 	ft_putstr_fd("ls: illegal option -- ", 2);
 	ft_putchar_fd(option, 2);
 	ft_putchar_fd('\n', 2);
-	ft_putendl_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]" , 2);
+	ft_putendl_fd("usage: ls [-arltR] [file ...]", 2);
 	exit(EXIT_FAILURE);
 }
