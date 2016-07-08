@@ -6,11 +6,21 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/08 12:29:24 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/08 13:03:01 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 15:12:49 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+int				t_pos_alpha(t_arg **runner, t_arg **tmp, t_arg **new_lst)
+{
+	position_front(*runner, *tmp);
+	if ((*tmp)->prev == NULL)
+		*new_lst = *tmp;
+	else if ((*tmp)->prev != NULL)
+		position_insert(*tmp);
+	return (1);
+}
 
 void			arg_sort_alpha(t_arg **old_lst)
 {
@@ -29,20 +39,11 @@ void			arg_sort_alpha(t_arg **old_lst)
 		*old_lst = (*old_lst)->next;
 		while (runner != NULL)
 		{
-			if (ft_strcmp(runner->name, tmp->name) > 0)
-			{
-				position_front(runner, tmp);
-				if (tmp->prev == NULL)
-					new_lst = tmp;
-				else if (tmp->prev != NULL)
-					position_insert(tmp);
+			if (ft_strcmp(runner->name, tmp->name) > 0 &&
+					t_pos_alpha(&runner, &tmp, &new_lst))
 				break ;
-			}
-			else if (runner->next == NULL)
-			{
-				position_back(runner, tmp);
+			else if (runner->next == NULL && position_back(runner, tmp))
 				break ;
-			}
 			runner = runner->next;
 		}
 		runner = new_lst;

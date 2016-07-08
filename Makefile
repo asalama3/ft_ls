@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/07/06 14:47:29 by asalama          ###   ########.fr        #
+#    Updated: 2016/07/08 14:56:35 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC_NAME = main.c				\
 		   flags.c				\
 		   argv_list.c			\
 		   print.c				\
-		   sort_arg_list.c		\
+		   sort_flags_alpha.c	\
+		   sort_time_reverse.c	\
 		   list_tools.c			\
 		   position.c			\
 		   check_files.c		\
