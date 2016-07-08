@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/06 16:02:29 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 12:31:46 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 
 # define MAJOR(dev)			((unsigned int) ((dev) >> MINORBITS))
 # define MINOR(dev)			((unsigned int) ((dev) & MINORMASK))
+
+# define TIME_S buf->st_mtimespec.tv_sec
+# define TIME_NS buf->st_mtimespec.tv_nsec
 
 typedef struct stat			t_stat;
 
@@ -87,6 +90,7 @@ void						ft_error(char option);
 t_arg						*error_list(t_arg **old_lst);
 void						ft_stat_error(char *file);
 void						error_exit(char *str, int error);
+void						error_open(t_arg *runner);
 
 /*
 **FLAGS
@@ -126,6 +130,8 @@ int							make_d(t_arg *dir_lst, t_arg *runner,
 */
 void						sort_flags(t_flags *option, t_arg **arg_lst);
 void						arg_sort_alpha(t_arg **arg_lst);
+void						arg_sort_time(t_arg **arg_lst);
+void						arg_sort_reverse(t_arg **arg_lst);
 void						arg_sort_file_dir(t_arg **old_lst);
 
 /*

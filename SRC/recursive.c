@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/07 17:40:21 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 12:13:15 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,7 @@ void		rec(t_arg *dir_lst, t_flags *option, t_file *file)
 				info_and_total_l(runner, file);
 			print_file(runner);
 			if (!(runner->dir = opendir(runner->path)))
-			{
-				ft_putstr(runner->path);
-				ft_putstr(": ");
-				ft_putstr(strerror(errno));
-				ft_putstr("\n");
-			}
+				error_open(runner);
 			else
 			{
 				make_d(ptr, runner, option, file);

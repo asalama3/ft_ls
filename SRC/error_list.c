@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 17:43:30 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/07 16:49:09 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 10:54:53 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_arg		*err(t_arg *runner, t_arg *error_lst, t_arg **old_lst)
 	tmp = runner;
 	while (tmp != NULL)
 	{
-		printf("%i\n", errno);
 		if (tmp->buf == NULL)
 		{
 			runner = tmp->next;
@@ -57,7 +56,6 @@ t_arg		*error_list(t_arg **old_lst)
 
 	runner = *old_lst;
 	error_lst = NULL;
-		printf("%i\n", errno);
 	while ((runner != NULL && runner->buf == NULL))
 	{
 		*old_lst = (*old_lst)->next;

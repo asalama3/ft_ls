@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/13 13:39:39 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/07 17:40:24 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 11:49:01 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,6 @@ int				ft_ls(char **argv, t_flags option)
 	sort_flags(&option, &arg_lst);
 	error = error_list(&arg_lst);
 	arg_sort_file_dir(&arg_lst);
-//	printf("%p\n", arg_lst->buf);
-//	print_arg_list(arg_lst, &option, NULL);
-//	print_arg_list(error, &option, NULL);
 	if (!option.l)
 		test_file(&arg_lst);
 	test_dir(&arg_lst, &option, error);

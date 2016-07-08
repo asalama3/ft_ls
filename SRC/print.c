@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/06 13:10:52 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 11:50:28 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void		print_total(t_file *file)
 void		print_l_info(t_file *file)
 {
 	ft_putstr(file->rights);
-//	get_acl(file->file_name);
 	ft_putstr(" ");
 	ft_putnbr(file->nb_hlink);
 	ft_putstr(" ");

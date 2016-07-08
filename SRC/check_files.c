@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/07 17:40:19 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/08 12:12:52 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ void		info_and_print_l(t_arg *runner, t_file *file)
 void		dir_ok(t_arg *runner, t_arg *dir_lst, t_flags *option, t_file *file)
 {
 	if (!(runner->dir = opendir(runner->path)))
-	{
-		ft_putstr(runner->path);
-		ft_putstr(":");
-		ft_putstr(strerror(errno));
-		ft_putstr("\n");
-	}
+		error_open(runner);
 	else
 	{
 		make_d(dir_lst, runner, option, file);
