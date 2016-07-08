@@ -6,7 +6,7 @@
 #    By: asalama <asalama@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 12:14:52 by asalama           #+#    #+#              #
-#    Updated: 2016/07/08 14:56:35 by asalama          ###   ########.fr        #
+#    Updated: 2016/07/08 16:20:08 by asalama          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC_NAME = main.c				\
 		   recursive.c			\
 		   l_option.c			\
 		   l_option_continue.c	\
-		   acl.c				\
+		   sticky_bits.c		\
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
