@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 17:54:51 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/08 12:31:46 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/20 15:19:24 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void						get_rights(t_arg *runner, t_file *file);
 void						nb_hardlinks(t_arg *runner, t_file *file);
 void						get_file_owner(t_arg *runner, t_file *file);
 void						get_file_group(t_arg *runner, t_file *file);
-void						get_sticky_bits(t_file *file);
+void						get_sticky_bits(t_arg *runner, t_file *file);
 void						get_file_size(t_arg *runner, t_file *file);
 void						get_file_time(t_arg *runner, t_file *file);
 void						get_file_name(t_arg *runner, t_file *file);

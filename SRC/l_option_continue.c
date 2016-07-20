@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 12:09:19 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/08 11:49:42 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/20 16:05:47 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		total(t_arg *runner, t_file *file)
 void		l_info(t_arg *runner, t_file *file)
 {
 	get_rights(runner, file);
+	get_sticky_bits(runner, file);
 	nb_hardlinks(runner, file);
 	get_file_owner(runner, file);
 	get_file_group(runner, file);
