@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/28 10:48:20 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/05 11:27:51 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/21 19:30:41 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int			flags(char **argv, t_flags *option)
 		if (argv[i][0] == '-' && argv[i][1])
 		{
 			j = 1;
+			if (!ft_strcmp(argv[i], "--"))
+				return (i + 1);
 			while (argv[i][j])
 			{
 				if (get_options(argv[i][j], option) == -1)

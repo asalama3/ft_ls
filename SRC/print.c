@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/17 12:08:57 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/21 12:35:41 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/21 19:29:36 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ void		print_arg_list(t_arg *lst, t_flags *option, t_file *file)
 
 void		print_file(t_arg *runner)
 {
-	char	*tmp;
+	char			*tmp;
+	static int		i = 0;
 
 	if (!(tmp = ft_strdup(runner->path)))
 		exit(EXIT_FAILURE);
-	if (runner->prev != NULL)
+	if (runner->prev != NULL || i)
 		ft_putstr("\n");
 	ft_putstr(tmp);
 	write(1, ":\n", 2);
 	free(tmp);
+	i++;
 }
 
 void		print_total(t_file *file)
