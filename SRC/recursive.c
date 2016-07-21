@@ -6,7 +6,7 @@
 /*   By: asalama <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/07 12:38:05 by asalama           #+#    #+#             */
-/*   Updated: 2016/07/08 12:13:15 by asalama          ###   ########.fr       */
+/*   Updated: 2016/07/21 12:35:38 by asalama          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		options_and_print(t_flags *option, t_file *file, t_arg *dir_lst)
 	print_arg_list(dir_lst, option, file);
 	if (option->cap_r)
 		rec(dir_lst, option, file);
+	file->nb_blocks = 0;
 }
 
 int			make_d(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
@@ -59,12 +60,15 @@ int			make_d(t_arg *dir_lst, t_arg *runner, t_flags *option, t_file *file)
 			total(link, file);
 	}
 	options_and_print(option, file, dir_lst);
+//	ft_putnbr(list_len(&dir_lst));
+//	ft_putchar('\n');
 	return (0);
 }
 
 void		info_and_total_l(t_arg *runner, t_file *file)
 {
 	l_info(runner, file);
+	ft_putnbr(runner->buf->st_blocks);
 	total(runner, file);
 }
 
@@ -80,8 +84,8 @@ void		rec(t_arg *dir_lst, t_flags *option, t_file *file)
 		if (S_ISDIR(runner->buf->st_mode) && ft_strcmp(runner->name, ".") != 0
 				&& ft_strcmp(runner->name, "..") != 0)
 		{
-			if (option->l)
-				info_and_total_l(runner, file);
+//			if (option->l)
+//				info_and_total_l(runner, file);
 			print_file(runner);
 			if (!(runner->dir = opendir(runner->path)))
 				error_open(runner);
